@@ -14,7 +14,7 @@ export const AdditionalInfoContainer = memo(() => {
 
     const onEditArticle = useCallback(() => {
         if (article) {
-            navigate(getRouteArticleEdit(article.id));
+            navigate(getRouteArticleEdit('1'));
         }
     }, [article, navigate]);
 

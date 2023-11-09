@@ -6,7 +6,7 @@ import {
     getRouteAdmin,
     getRouteProfile,
 } from '@/shared/const/router';
-import { UserRole } from '@/entities/User';
+// import { UserRole } from '@/entities/User';
 
 describe('app/router/AppRouter', () => {
     test('Страница должна отрендериться', async () => {
@@ -29,7 +29,7 @@ describe('app/router/AppRouter', () => {
 
     test('Редирект неавторизованного пользователя на главную', async () => {
         componentRender(<AppRouter />, {
-            route: getRouteProfile('1'),
+            route: getRouteProfile(1),
         });
 
         const page = await screen.findByTestId('MainPage');
@@ -38,7 +38,7 @@ describe('app/router/AppRouter', () => {
 
     test('Доступ к закрытой страницы для авторизованного пользователя', async () => {
         componentRender(<AppRouter />, {
-            route: getRouteProfile('1'),
+            route: getRouteProfile(1),
             initialState: {
                 user: { _inited: true, authData: {} },
             },
@@ -64,7 +64,7 @@ describe('app/router/AppRouter', () => {
         componentRender(<AppRouter />, {
             route: getRouteAdmin(),
             initialState: {
-                user: { _inited: true, authData: { roles: [UserRole.ADMIN] } },
+                // user: { _inited: true, authData },
             },
         });
 

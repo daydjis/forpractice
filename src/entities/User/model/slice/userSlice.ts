@@ -3,9 +3,8 @@ import {
     LOCAL_STORAGE_LAST_DESIGN_KEY,
     USER_LOCALSTORAGE_KEY,
 } from '@/shared/const/localstorage';
-import { UserSchema, User } from '../types/user';
-import { setFeatureFlags } from '@/shared/lib/features';
-import { saveJsonSettings } from '../services/saveJsonSettings';
+import {UserSchema, User, UserNew} from '../types/user';
+// import { saveJsonSettings } from '../services/saveJsonSettings';
 import { JsonSettings } from '../types/jsonSettings';
 import { initAuthData } from '../services/initAuthData';
 
@@ -17,34 +16,39 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setAuthData: (state, { payload }: PayloadAction<User>) => {
-            state.authData = payload;
-            setFeatureFlags(payload.features);
-            localStorage.setItem(USER_LOCALSTORAGE_KEY, payload.id);
+        setAuthData: (state, { payload }: PayloadAction<UserNew>) => {
+            // setFeatureFlags(payload.features);
+            localStorage.setItem(USER_LOCALSTORAGE_KEY, String(`Bearer ${  payload.access_token}`));
             localStorage.setItem(
                 LOCAL_STORAGE_LAST_DESIGN_KEY,
-                payload.features?.isAppRedesigned ? 'new' : 'old',
+                // payload.features?.isAppRedesigned ? 'new' : 'old',
+                'new'
             );
         },
+
+        setAuthUserData: (state, {payload}: PayloadAction<User>) => {
+            state.authData = payload
+        },
+
         logout: (state) => {
             state.authData = undefined;
             localStorage.removeItem(USER_LOCALSTORAGE_KEY);
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(
-            saveJsonSettings.fulfilled,
-            (state, { payload }: PayloadAction<JsonSettings>) => {
-                if (state.authData) {
-                    state.authData.jsonSettings = payload;
-                }
-            },
-        );
+        // builder.addCase(
+        //     saveJsonSettings.fulfilled,
+        //     (state, { payload }: PayloadAction<JsonSettings>) => {
+        //         if (state.authData) {
+        //             // state.authData.jsonSettings = payload;
+        //         }
+        //     },
+        // );
         builder.addCase(
             initAuthData.fulfilled,
             (state, { payload }: PayloadAction<User>) => {
                 state.authData = payload;
-                setFeatureFlags(payload.features);
+                // setFeatureFlags(payload.features);
                 state._inited = true;
             },
         );

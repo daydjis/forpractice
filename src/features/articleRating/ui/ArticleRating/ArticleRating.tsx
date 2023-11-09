@@ -21,7 +21,7 @@ const ArticleRating = memo((props: ArticleRatingProps) => {
 
     const { data, isLoading } = useGetArticleRating({
         articleId,
-        userId: userData?.id ?? '',
+        userId: '1'
     });
     const [rateArticleMutation] = useRateArticle();
 
@@ -29,7 +29,7 @@ const ArticleRating = memo((props: ArticleRatingProps) => {
         (starsCount: number, feedback?: string) => {
             try {
                 rateArticleMutation({
-                    userId: userData?.id ?? '',
+                    userId:  '',
                     articleId,
                     rate: starsCount,
                     feedback,
@@ -39,7 +39,7 @@ const ArticleRating = memo((props: ArticleRatingProps) => {
                 console.log(e);
             }
         },
-        [articleId, rateArticleMutation, userData?.id],
+        [articleId, rateArticleMutation],
     );
 
     const onAccept = useCallback(

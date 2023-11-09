@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { User, userActions } from '@/entities/User';
+import qs from 'qs';
+import { User, userActions ,UserNew} from '@/entities/User';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 
 interface LoginByUsernameProps {
@@ -8,20 +9,40 @@ interface LoginByUsernameProps {
 }
 
 export const loginByUsername = createAsyncThunk<
-    User,
+    UserNew,
     LoginByUsernameProps,
     ThunkConfig<string>
 >('login/loginByUsername', async (authData, thunkApi) => {
     const { extra, dispatch, rejectWithValue } = thunkApi;
 
+    // "TODO - поместить в конфиг и сделать КРАСUВ0"
+    const options = {
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    };
+
     try {
-        const response = await extra.api.post<User>('/login', authData);
+        const response = await extra.api.post<UserNew>(
+            '/users/login',
+            qs.stringify(authData),
+            options
+
+        );
+
+        dispatch(userActions.setAuthData(response.data));
+
+
+        if (response.data.access_token) {
+            const auth = await extra.api.get<User>(
+                '/users/me',
+            )
+
+            dispatch(userActions.setAuthUserData(auth.data))
+        }
 
         if (!response.data) {
             throw new Error();
         }
 
-        dispatch(userActions.setAuthData(response.data));
         return response.data;
     } catch (e) {
         console.log(e);
