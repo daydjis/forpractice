@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
-import { Currency } from '@/entities/Currency';
 import { Country } from '@/entities/Country';
 import { Text, TextTheme } from '@/shared/ui/deprecated/Text';
 import { ProfileCard } from '@/entities/Profile';
@@ -63,7 +62,7 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
 
     const onChangeFirstname = useCallback(
         (value?: string) => {
-            dispatch(profileActions.updateProfile({ first: value || '' }));
+            dispatch(profileActions.updateProfile({ name: value || '' }));
         },
         [dispatch],
     );
@@ -91,7 +90,7 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
 
     const onChangeUsername = useCallback(
         (value?: string) => {
-            dispatch(profileActions.updateProfile({ username: value || '' }));
+            dispatch(profileActions.updateProfile({ login: value || '' }));
         },
         [dispatch],
     );
@@ -99,13 +98,6 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
     const onChangeAvatar = useCallback(
         (value?: string) => {
             dispatch(profileActions.updateProfile({ avatar: value || '' }));
-        },
-        [dispatch],
-    );
-
-    const onChangeCurrency = useCallback(
-        (currency: Currency) => {
-            dispatch(profileActions.updateProfile({ currency }));
         },
         [dispatch],
     );
@@ -141,7 +133,6 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
                     onChangeCity={onChangeCity}
                     onChangeUsername={onChangeUsername}
                     onChangeAvatar={onChangeAvatar}
-                    onChangeCurrency={onChangeCurrency}
                     onChangeCountry={onChangeCountry}
                 />
             </VStack>

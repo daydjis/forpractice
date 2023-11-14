@@ -6,7 +6,6 @@ import { ProfileCardProps } from '../ProfileCard/ProfileCard';
 import { HStack, VStack } from '@/shared/ui/redesigned/Stack';
 import { Avatar as AvatarDeprecated } from '@/shared/ui/deprecated/Avatar';
 import { Input as InputDeprecated } from '@/shared/ui/deprecated/Input';
-import { CurrencySelect } from '@/entities/Currency';
 import { CountrySelect } from '@/entities/Country';
 import { Loader } from '@/shared/ui/deprecated/Loader';
 import {
@@ -78,7 +77,7 @@ export const ProfileCardDeprecated = memo((props: ProfileCardProps) => {
                 </HStack>
             )}
             <InputDeprecated
-                value={data?.first}
+                value={data?.name}
                 placeholder={t('Ваше имя')}
                 className={cls.input}
                 onChange={onChangeFirstname}
@@ -108,7 +107,7 @@ export const ProfileCardDeprecated = memo((props: ProfileCardProps) => {
                 readonly={readonly}
             />
             <InputDeprecated
-                value={data?.username}
+                value={data?.login}
                 placeholder={t('Введите имя пользователя')}
                 className={cls.input}
                 onChange={onChangeUsername}
@@ -119,12 +118,6 @@ export const ProfileCardDeprecated = memo((props: ProfileCardProps) => {
                 placeholder={t('Введите ссылку на аватар')}
                 className={cls.input}
                 onChange={onChangeAvatar}
-                readonly={readonly}
-            />
-            <CurrencySelect
-                className={cls.input}
-                value={data?.currency}
-                onChange={onChangeCurrency}
                 readonly={readonly}
             />
             <CountrySelect
