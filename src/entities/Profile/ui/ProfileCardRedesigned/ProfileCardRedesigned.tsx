@@ -4,7 +4,6 @@ import { Card } from '@/shared/ui/redesigned/Card';
 import { HStack, VStack } from '@/shared/ui/redesigned/Stack';
 import { Avatar } from '@/shared/ui/redesigned/Avatar';
 import { Input } from '@/shared/ui/redesigned/Input';
-import { CurrencySelect } from '@/entities/Currency';
 import { CountrySelect } from '@/entities/Country';
 import { ProfileCardProps } from '../ProfileCard/ProfileCard';
 import { Skeleton } from '@/shared/ui/redesigned/Skeleton';
@@ -64,7 +63,6 @@ export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
         onChangeAvatar,
         onChangeUsername,
         onChangeCountry,
-        onChangeCurrency,
     } = props;
     const { t } = useTranslation('profile');
 
@@ -79,7 +77,7 @@ export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
                 <HStack gap="24" max>
                     <VStack gap="16" max>
                         <Input
-                            value={data?.first}
+                            value={data?.name}
                             label={t('Имя')}
                             onChange={onChangeFirstname}
                             readonly={readonly}
@@ -99,7 +97,7 @@ export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
                             readonly={readonly}
                         />
                         <Input
-                            value={data?.city}
+                            value={data?.city || "Самара"}
                             label={t('Город')}
                             onChange={onChangeCity}
                             readonly={readonly}
@@ -107,7 +105,7 @@ export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
                     </VStack>
                     <VStack gap="16" max>
                         <Input
-                            value={data?.username}
+                            value={data?.login}
                             label={t('Имя пользователя')}
                             onChange={onChangeUsername}
                             readonly={readonly}
@@ -116,11 +114,6 @@ export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
                             value={data?.avatar}
                             label={t('Cсылка на аватар')}
                             onChange={onChangeAvatar}
-                            readonly={readonly}
-                        />
-                        <CurrencySelect
-                            value={data?.currency}
-                            onChange={onChangeCurrency}
                             readonly={readonly}
                         />
                         <CountrySelect

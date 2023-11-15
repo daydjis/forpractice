@@ -31,7 +31,7 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
                 src={article.user.avatar}
                 className={cls.avatar}
             />
-            <Text bold text={article.user.username} />
+            <Text bold text={article.user.login} />
         </>
     );
     const views = (
@@ -78,7 +78,7 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
                     <HStack max justify="between">
                         <AppLink
                             target={target}
-                            to={getRouteArticleDetails(article.id)}
+                            to={getRouteArticleDetails('1')}
                         >
                             <Button variant="outline">
                                 {t('Читать далее...')}
@@ -95,7 +95,7 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
         <AppLink
             data-testid="ArticleListItem"
             target={target}
-            to={getRouteArticleDetails(article.id)}
+            to={getRouteArticleDetails('1')}
             className={classNames(cls.ArticleListItem, {}, [
                 className,
                 cls[view],

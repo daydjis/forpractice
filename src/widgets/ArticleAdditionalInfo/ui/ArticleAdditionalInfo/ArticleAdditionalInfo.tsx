@@ -30,7 +30,7 @@ export const ArticleAdditionalInfo = memo(
             >
                 <HStack gap="8">
                     <Avatar src={author.avatar} size={32} />
-                    <Text text={author.username} bold />
+                    <Text text={author.lastname} bold />
                     <Text text={createdAt} />
                 </HStack>
                 <Button onClick={onEdit}>{t('Редактировать')}</Button>

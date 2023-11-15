@@ -26,8 +26,7 @@ const article: Article = {
     createdAt: '26.02.2022',
     type: [ArticleType.IT],
     user: {
-        id: '1',
-        username: 'Ulbi tv',
+        login: 'kenya123',
     },
     blocks: [
         {

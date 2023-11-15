@@ -39,7 +39,7 @@ export const UiDesignSwitcher = memo((props: UiDesignSwitcherProps) => {
             setIsLoading(true);
             await dispatch(
                 updateFeatureFlag({
-                    userId: authData.id,
+                    userId: "1",
                     newFeatures: {
                         isAppRedesigned: value === 'new',
                     },
