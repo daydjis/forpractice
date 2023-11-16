@@ -40,7 +40,18 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     fullWidth?: boolean;
 
     color?: ButtonColor;
-
+    /**
+     * фоновая картинка
+     */
+     imageBackground?: string ;
+    /**
+     * если хотим кругляш
+     */
+    isSmall?: boolean;
+    /**
+     * если хотим дыню
+     */
+    isBig?: boolean;
     addonLeft?: ReactNode;
     addonRight?: ReactNode;
 }
@@ -58,19 +69,23 @@ export const Button = forwardRef(
             addonLeft,
             addonRight,
             color = 'normal',
+            imageBackground,
+            isSmall,
             ...otherProps
         } = props;
-
         const mods: Mods = {
             [cls.square]: square,
             [cls.disabled]: disabled,
             [cls.fullWidth]: fullWidth,
             [cls.withAddon]: Boolean(addonLeft) || Boolean(addonRight),
+            [cls.btnImageWidthSmall]: isSmall && imageBackground,
+            [cls.btnImageWidthBig]: !isSmall && imageBackground,
         };
 
         return (
             <button
                 type="button"
+                style={{backgroundImage:`url(${imageBackground})`}}
                 className={classNames(cls.Button, mods, [
                     className,
                     cls[variant],

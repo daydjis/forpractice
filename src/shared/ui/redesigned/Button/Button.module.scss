@@ -100,3 +100,17 @@
 .fullWidth {
     width: 100%;
 }
+
+.btnImageWidthSmall{
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+}
+
+.btnImageWidthBig{
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 50px;
+}
