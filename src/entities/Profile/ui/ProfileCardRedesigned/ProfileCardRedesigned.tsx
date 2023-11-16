@@ -97,7 +97,7 @@ export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
                             readonly={readonly}
                         />
                         <Input
-                            value={data?.city || "Самара"}
+                            value={data?.city}
                             label={t('Город')}
                             onChange={onChangeCity}
                             readonly={readonly}
