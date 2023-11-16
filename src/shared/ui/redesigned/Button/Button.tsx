@@ -40,11 +40,17 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     fullWidth?: boolean;
 
     color?: ButtonColor;
-    //фоновая картинка
-    imageBackground?: string ;
-    //если хотим кругляш
+    /**
+     * фоновая картинка
+     */
+     imageBackground?: string ;
+    /**
+     * если хотим кругляш
+     */
     isSmall?: boolean;
-    //если хотим дыню
+    /**
+     * если хотим дыню
+     */
     isBig?: boolean;
     addonLeft?: ReactNode;
     addonRight?: ReactNode;

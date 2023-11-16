@@ -1,15 +1,11 @@
 import { Text } from '@/shared/ui/redesigned/Text';
 import { Button } from '@/shared/ui/redesigned/Button';
 import { Card } from '@/shared/ui/redesigned/Card';
-import { useHref, useNavigate } from 'react-router-dom';
-import { a } from '@react-spring/web';
-import { Link } from 'react-router-dom';
-import { classNames } from '@/shared/lib/classNames/classNames';
+import { useNavigate } from 'react-router-dom';
 import vk from '@/shared/assets/icons/vk.jpg';
 import rutube from '@/shared/assets/icons/rutube.jpg';
 import telegramm from '@/shared/assets/icons/телеграф.png';
 import cls from './Description.module.scss';
-import { ButtonSize } from '@/shared/ui/deprecated/Button';
 
 export const Description = () => {
     const navigate = useNavigate();
