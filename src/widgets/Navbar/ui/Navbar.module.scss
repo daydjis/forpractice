@@ -24,3 +24,9 @@
     width: var(--sidebar-width);
     margin-left: 15px;
 }
+
+.authContainer {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}

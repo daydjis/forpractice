@@ -18,6 +18,7 @@ import { useForceUpdate } from '@/shared/lib/render/forceUpdate';
 import { getUserRegister} from '../../model/selectors/getUserInfo/getUserInfo';
 import {getRegisterError} from '../../model/selectors/getRegisterError/getLoginError';
 import {getRegisterIsLoading} from '../../model/selectors/getRegisterLoading/getLoginIsLoading';
+import {CountrySelect} from "@/entities/Country";
 
 export interface RegisterFormProps {
     className?: string;
@@ -35,7 +36,6 @@ const RegistrationFrom = memo(({ className, onSuccess }: RegisterFormProps) => {
     const isLoading = useSelector(getRegisterIsLoading);
     const error = useSelector(getRegisterError);
     const forceUpdate = useForceUpdate();
-
     const onChangeUsername = useCallback(
         (value: string) => {
             dispatch(registerActions.setLogin(value));
@@ -43,9 +43,51 @@ const RegistrationFrom = memo(({ className, onSuccess }: RegisterFormProps) => {
         [dispatch],
     );
 
+    const onChangeLastname = useCallback(
+        (value: string) => {
+            dispatch(registerActions.setLastname(value));
+        },
+        [dispatch],
+    );
+
     const onChangePassword = useCallback(
         (value: string) => {
             dispatch(registerActions.setPassword(value));
+        },
+        [dispatch],
+    );
+
+    const onChangeAvatar = useCallback(
+        (value: string) => {
+            dispatch(registerActions.setAvatar(value));
+        },
+        [dispatch],
+    );
+
+    const onChangeCity = useCallback(
+        (value: string) => {
+            dispatch(registerActions.setCity(value));
+        },
+        [dispatch],
+    );
+
+    const onChangeCountry = useCallback(
+        (value: string) => {
+            dispatch(registerActions.setCountry(value));
+        },
+        [dispatch],
+    );
+
+    const onChangeAge = useCallback(
+        (value: string) => {
+            dispatch(registerActions.setAge(Number(value)));
+        },
+        [dispatch],
+    );
+
+    const onChangeName = useCallback(
+        (value: string) => {
+            dispatch(registerActions.setName(value));
         },
         [dispatch],
     );
@@ -62,12 +104,12 @@ const RegistrationFrom = memo(({ className, onSuccess }: RegisterFormProps) => {
         <DynamicModuleLoader removeAfterUnmount reducers={initialReducers}>
                     <VStack
                         gap="16"
-                        className={classNames(cls.LoginForm, {}, [className])}
+                        className={classNames(cls.RegisterFrom, {}, [className])}
                     >
-                        <Text title={t('Форма авторизации')} />
+                        <Text title={t('Регистрация')} />
                         {error && (
                             <Text
-                                text={t('Вы ввели неверный логин или пароль')}
+                                text={error}
                                 variant="error"
                             />
                         )}
@@ -75,23 +117,61 @@ const RegistrationFrom = memo(({ className, onSuccess }: RegisterFormProps) => {
                             autofocus
                             type="text"
                             className={cls.input}
-                            placeholder={t('Введите username')}
+                            placeholder={t('Введите name')}
+                            onChange={onChangeName}
+                            value={username.name}
+                        />
+                        <Input
+                            autofocus
+                            type="text"
+                            className={cls.input}
+                            placeholder={t('Введите login')}
                             onChange={onChangeUsername}
-                            value={username}
+                            value={username.login}
+                        />
+                        <Input
+                            autofocus
+                            type="text"
+                            className={cls.input}
+                            placeholder={t('Введите lastname')}
+                            onChange={onChangeLastname}
+                            value={username.lastname}
+                        />
+                        <Input
+                            type="password"
+                            className={cls.input}
+                            placeholder={t('Введите password')}
+                            onChange={onChangePassword}
+                            value={username.password}
                         />
                         <Input
                             type="text"
                             className={cls.input}
-                            placeholder={t('Введите пароль')}
-                            onChange={onChangePassword}
-                            value={username}
+                            placeholder={t('Введите ссылку на avatar')}
+                            onChange={onChangeAvatar}
+                            value={username.avatar}
                         />
+                        <Input
+                            type="text"
+                            className={cls.input}
+                            placeholder={t('Введите city')}
+                            onChange={onChangeCity}
+                            value={username.city}
+                        />
+                        <Input
+                            type="number"
+                            className={cls.input}
+                            placeholder={t('Введите age')}
+                            onChange={onChangeAge}
+                            value={username.age}
+                        />
+                        <CountrySelect onChange={onChangeCountry} value={username?.country}/>
                         <Button
                             className={cls.loginBtn}
                             onClick={onLoginClick}
                             disabled={isLoading}
                         >
-                            {t('Войти')}
+                            {t('Зарегистрироваться')}
                         </Button>
                     </VStack>
         </DynamicModuleLoader>

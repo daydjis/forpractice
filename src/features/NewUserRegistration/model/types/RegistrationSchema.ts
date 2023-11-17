@@ -1,3 +1,5 @@
+import {Country} from "@/entities/Country";
+
 export interface RegistrationSchema {
     error?: string,
     isLoading?: boolean,
@@ -8,5 +10,5 @@ export interface RegistrationSchema {
     age?: number,
     avatar?: string,
     city?: string,
-    country?: string
+    country?: Country
 }

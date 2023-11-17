@@ -1,2 +1,2 @@
-export { RegistratrationModal } from './ui/RegisterModal/RegistrtrationModal';
+export { RegisterModal } from './ui/RegisterModal/RegisterModal';
 export type { RegistrationSchema } from './model/types/RegistrationSchema';

@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RegistrationSchema } from '../types/RegistrationSchema';
-import { registrationNewUser} from '../services/loginByUsername/registrationNewUser';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {RegistrationSchema} from '../types/RegistrationSchema';
+import {registrationNewUser} from '../services/loginByUsername/registrationNewUser';
+import {Country} from "@/entities/Country";
 
 const initialState: RegistrationSchema = {
     isLoading: false,
@@ -9,8 +10,8 @@ const initialState: RegistrationSchema = {
     login: '',
     lastname: '',
     city: '',
-    country: '',
-    avatar: '',
+    country: Country.Chechnya,
+    avatar: 'https://detalcar.com.ua/image/catalog/avatar.jpg',
     password: '',
     name: '',
     age: 0,
@@ -35,14 +36,14 @@ export const registerSlice = createSlice({
         setLastname: (state, action: PayloadAction<string>) => {
             state.lastname = action.payload;
         },
-        setCountry: (state, action: PayloadAction<string>) => {
+        setCountry: (state, action: PayloadAction<Country>) => {
             state.country = action.payload;
         },
         setAge: (state, action: PayloadAction<number>) => {
             state.age = action.payload;
         },
-        setCounty: (state, action: PayloadAction<string>) => {
-            state.country = action.payload;
+        setAvatar: (state, action: PayloadAction<string>) => {
+            state.avatar = action.payload;
         },
 
     },

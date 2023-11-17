@@ -25,7 +25,6 @@ export const loginByUsername = createAsyncThunk<
             '/users/login',
             qs.stringify(authData),
             options
-
         );
 
         dispatch(userActions.setAuthData(response.data));
