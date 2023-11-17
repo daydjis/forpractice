@@ -19,8 +19,8 @@ export const ThemeSwitcher = memo(({ className }: ThemeSwitcherProps) => {
     const dispatch = useAppDispatch();
 
     const onToggleHandler = useCallback(() => {
-
-    }, []);
+            toggleTheme(()=> !theme)
+    }, [toggleTheme, theme]);
 
     return (
         <ToggleFeatures

@@ -28,21 +28,21 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
         <>
             <Avatar
                 size={32}
-                src={article.user.avatar}
+                src={article?.user?.avatar || ''}
                 className={cls.avatar}
             />
-            <Text bold text={article.user.login} />
+            <Text bold text={article?.user?.login} />
         </>
     );
     const views = (
         <HStack gap="8">
             <Icon Svg={EyeIcon} />
-            <Text text={String(article.views)} className={cls.views} />
+            <Text text={String(article?.views)} className={cls.views} />
         </HStack>
     );
 
-    if (view === ArticleView.BIG) {
-        const textBlock = article.blocks.find(
+    if (view === ArticleView.BIG && article?.blocks) {
+        const textBlock = article?.blocks.find(
             (block) => block.type === ArticleBlockType.TEXT,
         ) as ArticleTextBlock;
 
