@@ -11,6 +11,14 @@ export const $api = axios.create({
     }
 });
 
+const url = "https://backend-mu-dun.vercel.app/users/login";
+
+const options = {
+    method: 'POST',
+    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    url
+}
+
 $api.interceptors.request.use((config) => {
     if (config.headers) {
         config.headers.Authorization =
