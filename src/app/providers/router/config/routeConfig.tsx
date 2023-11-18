@@ -19,10 +19,11 @@ import {
     getRouteArticles,
     getRouteMain,
     getRouteProfile,
-    getRouteSettings,
+    getRouteSettings, getRouteFriends,
 } from '@/shared/const/router';
 import { AppRoutesProps } from '@/shared/types/router';
 import { SettingsPage } from '@/pages/SettingsPage';
+import FriendsPage from "../../../../pages/FriendsPage";
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MAIN]: {
@@ -71,6 +72,10 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.FORBIDDEN]: {
         path: getRouteForbidden(),
         element: <ForbiddenPage />,
+    },
+    [AppRoutes.FRIENDS]: {
+        path: getRouteFriends(),
+        element: <FriendsPage />,
     },
     // last
     [AppRoutes.NOT_FOUND]: {

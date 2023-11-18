@@ -18,7 +18,7 @@ import { useForceUpdate } from '@/shared/lib/render/forceUpdate';
 import { getUserRegister} from '../../model/selectors/getUserInfo/getUserInfo';
 import {getRegisterError} from '../../model/selectors/getRegisterError/getLoginError';
 import {getRegisterIsLoading} from '../../model/selectors/getRegisterLoading/getLoginIsLoading';
-import {CountrySelect} from "@/entities/Country";
+import {Country, CountrySelect} from "@/entities/Country";
 
 export interface RegisterFormProps {
     className?: string;
@@ -72,7 +72,7 @@ const RegistrationFrom = memo(({ className, onSuccess }: RegisterFormProps) => {
     );
 
     const onChangeCountry = useCallback(
-        (value: string) => {
+        (value: Country) => {
             dispatch(registerActions.setCountry(value));
         },
         [dispatch],

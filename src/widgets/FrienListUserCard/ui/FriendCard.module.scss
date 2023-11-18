@@ -1,0 +1,16 @@
+.FriendCard {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ContainerFio {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.ContainerInfo {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}

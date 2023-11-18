@@ -5,7 +5,6 @@ import {
 } from '@/shared/const/localstorage';
 import {UserSchema, User, UserNew} from '../types/user';
 // import { saveJsonSettings } from '../services/saveJsonSettings';
-import { JsonSettings } from '../types/jsonSettings';
 import { initAuthData } from '../services/initAuthData';
 
 const initialState: UserSchema = {

@@ -36,3 +36,4 @@
 //     comments: [],
 //     isLoading: true,
 // };
+export default {}
