@@ -1,7 +1,7 @@
 .FriendCard {
   margin-top: 20px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
 }
 
 .ContainerFio {
@@ -11,6 +11,11 @@
 
 .ContainerInfo {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.Info {
+  display: flex;
   flex-direction: column;
 }

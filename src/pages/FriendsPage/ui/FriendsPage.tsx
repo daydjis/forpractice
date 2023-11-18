@@ -36,46 +36,27 @@ export const FriendsPage = ({className}: FriendsPageProps) => {
 
     const {t} = useTranslation()
 
-
-    const [currentTab, setCurrentTab] = useState("actualFriends")
-    const [currentArray, setcurrentArray] = useState(actualFriends)
+    const [isAddingFriend, setIsAddingFriend] = useState(false)
+    const [currentArray, setCurrentArray] = useState(actualFriends)
 
     const Tabs = {
-        'Мои друзья': 'actualFriends',
-        'Возможные друзья': 'recevietInvites',
-        'отправленные в друзья': 'sentInvites',
+        'Мои друзья': actualFriends,
+        'Возможные друзья': recevietInvites,
+        'отправленные заявки в друзья': sentInvites,
+        'добавить в друзья': []
     }
-    const handleChange = () => {
-        let content;
 
-        if (currentTab === "actualFriends") {
-            content = (recevietInvites.map(user => <FriendCard
-                    key={user.user.id}
-                    isLoading={isLoading}
-                    InfoFriends={user}
-                />
-            ))
-        }
-        if (currentTab === "recevietInvites") {
-            content = (recevietInvites.map(user => <FriendCard
-                    key={user.user.id}
-                    isLoading={isLoading}
-                    InfoFriends={user}
-                />
-            ))
-        }
-        if (currentTab === "sentInvites") {
-            content = (sentInvites.map(user => <FriendCard
-                    key={user.user.id}
-                    isLoading={isLoading}
-                    InfoFriends={user}
-                />
-            ))
-        }
+    const handleIsAddNewFriend = (newTabs: string) => {
+       if(newTabs ===  'добавить в друзья') {
+           setIsAddingFriend(true)
+       } else {
+           setIsAddingFriend(false)
+       }
     }
-    const handleChangeTabs = (newTabs: string): void => {
+    const handleChangeTabs = (newTabs: any): void => {
         // @ts-ignore
-        setCurrentTab(Tabs[newTabs])
+        setCurrentArray(Tabs[newTabs])
+        handleIsAddNewFriend(newTabs)
     }
 
     useEffect(() => {
@@ -87,15 +68,24 @@ export const FriendsPage = ({className}: FriendsPageProps) => {
             <div className={classNames(cls.FriendsPage, {}, [])}>
                 <div  className={classNames(cls.headerCard, {}, [])}>
                     {Object.keys(Tabs).map(item =>
-                        <Button key={item} onClick={() =>
-                            handleChangeTabs(item)}>{item}
-                        </Button>)}
+                        <Button
+                            style={{
+                                borderRadius: 0
+                            }}
+                            size="m"
+                            key={item}
+                            onClick={()=>handleChangeTabs(item)}
+                            title={item}
+                        >
+                            {item}
+                        </Button>)
+                    }
                 </div>
                 <div>
-                    <div className={classNames(cls.headerCard, {}, [])}>
-                        <div  className={classNames(cls.Counter, {}, [])}>{currentArray.length}</div>
-                    </div>
-                    {content}
+                    {!isAddingFriend && <div className={classNames(cls.Counter, {}, [])}>
+                        {`Человек в списке: ${ currentArray.length}`}
+                    </div>}
+                    <FriendCard isLoading={isLoading} isAddingNew={isAddingFriend} list={currentArray}/>
                 </div>
             </div>
         </DynamicModuleLoader>

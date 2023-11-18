@@ -6,11 +6,12 @@
   display: flex;
 }
 .Counter {
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50px;
-  width: 20px;
-  height: 20px;
-  background-color: var(--cancel-redesigned);
+  background-color: var(--icon-redesigned);
+  color: var(--text-redesigned);
 }
