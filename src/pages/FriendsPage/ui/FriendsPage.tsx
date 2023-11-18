@@ -43,7 +43,7 @@ export const FriendsPage = ({className}: FriendsPageProps) => {
     const Tabs = {
         'Мои друзья': 'actualFriends',
         'Возможные друзья': 'recevietInvites',
-        'Заявки в друзья': 'sentInvites',
+        'отправленные в друзья': 'sentInvites',
     }
 
     const choiceArray = () => {
