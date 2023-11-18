@@ -19,7 +19,7 @@ export interface ArticleImageBlock extends ArticleBlockBase {
 
 export interface ArticleTextBlock extends ArticleBlockBase {
     type: ArticleBlockType.TEXT;
-    paragraphs: string[];
+    paragraphs: any[];
     title?: string;
 }
 

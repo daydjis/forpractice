@@ -11,7 +11,6 @@ import { ArticleSortField, ArticleType, ArticleView } from '@/entities/Article';
 import { articlesPageActions } from '../../model/slices/articlesPageSlice';
 import { SortOrder } from '@/shared/types/sort';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { fetchArticlesList } from '../../model/services/fetchArticlesList/fetchArticlesList';
 import { useDebounce } from '@/shared/lib/hooks/useDebounce/useDebounce';
 
 export function useArticleFilters() {
@@ -24,8 +23,7 @@ export function useArticleFilters() {
     const dispatch = useAppDispatch();
 
     const fetchData = useCallback(() => {
-        dispatch(fetchArticlesList({ replace: true }));
-    }, [dispatch]);
+    }, []);
 
     const debouncedFetchData = useDebounce(fetchData, 500);
 
@@ -39,7 +37,6 @@ export function useArticleFilters() {
     const onChangeSort = useCallback(
         (newSort: ArticleSortField) => {
             dispatch(articlesPageActions.setSort(newSort));
-            dispatch(articlesPageActions.setPage(1));
             fetchData();
         },
         [dispatch, fetchData],
@@ -48,7 +45,6 @@ export function useArticleFilters() {
     const onChangeOrder = useCallback(
         (newOrder: SortOrder) => {
             dispatch(articlesPageActions.setOrder(newOrder));
-            dispatch(articlesPageActions.setPage(1));
             fetchData();
         },
         [dispatch, fetchData],
@@ -57,7 +53,6 @@ export function useArticleFilters() {
     const onChangeSearch = useCallback(
         (search: string) => {
             dispatch(articlesPageActions.setSearch(search));
-            dispatch(articlesPageActions.setPage(1));
             debouncedFetchData();
         },
         [dispatch, debouncedFetchData],
@@ -66,7 +61,6 @@ export function useArticleFilters() {
     const onChangeType = useCallback(
         (value: ArticleType) => {
             dispatch(articlesPageActions.setType(value));
-            dispatch(articlesPageActions.setPage(1));
             fetchData();
         },
         [dispatch, fetchData],

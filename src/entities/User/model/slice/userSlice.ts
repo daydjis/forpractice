@@ -4,7 +4,6 @@ import {
     USER_LOCALSTORAGE_KEY,
 } from '@/shared/const/localstorage';
 import {UserSchema, User, UserNew} from '../types/user';
-// import { saveJsonSettings } from '../services/saveJsonSettings';
 import { initAuthData } from '../services/initAuthData';
 
 const initialState: UserSchema = {
@@ -16,11 +15,9 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setAuthData: (state, { payload }: PayloadAction<UserNew>) => {
-            // setFeatureFlags(payload.features);
             localStorage.setItem(USER_LOCALSTORAGE_KEY, String(`Bearer ${  payload.access_token}`));
             localStorage.setItem(
                 LOCAL_STORAGE_LAST_DESIGN_KEY,
-                // payload.features?.isAppRedesigned ? 'new' : 'old',
                 'new'
             );
         },
@@ -35,14 +32,6 @@ export const userSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        // builder.addCase(
-        //     saveJsonSettings.fulfilled,
-        //     (state, { payload }: PayloadAction<JsonSettings>) => {
-        //         if (state.authData) {
-        //             // state.authData.jsonSettings = payload;
-        //         }
-        //     },
-        // );
         builder.addCase(
             initAuthData.fulfilled,
             (state, { payload }: PayloadAction<User>) => {

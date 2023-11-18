@@ -20,9 +20,9 @@ export const getRouteAbout = () => '/about';
 export const getRouteProfile = (id: number | string | undefined) => `/profile/${id}`;
 export const getRouteArticles = () => '/articles';
 export const getRouteFriends = () => '/friends'
-export const getRouteArticleDetails = (id: string) => `/articles/${id}`;
+export const getRouteArticleDetails = (id: number| string | undefined) => `/articles/${id}`;
 export const getRouteArticleCreate = () => '/articles/new';
-export const getRouteArticleEdit = (id: string) => `/articles/${id}/edit`;
+export const getRouteArticleEdit = (id: number| string | undefined) => `/articles/${id}/edit`;
 export const getRouteAdmin = () => '/admin';
 export const getRouteForbidden = () => '/forbidden';
 

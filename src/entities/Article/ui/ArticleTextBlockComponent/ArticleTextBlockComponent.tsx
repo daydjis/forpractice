@@ -40,15 +40,15 @@ export const ArticleTextBlockComponent = memo(
                         feature="isAppRedesigned"
                         on={
                             <Text
-                                key={paragraph}
-                                text={paragraph}
+                                key={paragraph.text}
+                                text={paragraph.text}
                                 className={cls.paragraph}
                             />
                         }
                         off={
                             <TextDeprecated
-                                key={paragraph}
-                                text={paragraph}
+                                key={paragraph.text}
+                                text={paragraph.text}
                                 className={cls.paragraph}
                             />
                         }

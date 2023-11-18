@@ -71,7 +71,7 @@ export const ArticleListItemDeprecated = memo((props: ArticleListItemProps) => {
                     <div className={cls.footer}>
                         <AppLink
                             target={target}
-                            to={getRouteArticleDetails('1')}
+                            to={getRouteArticleDetails(article.id)}
                         >
                             <Button theme={ButtonTheme.OUTLINE}>
                                 {t('Читать далее...')}
@@ -88,7 +88,7 @@ export const ArticleListItemDeprecated = memo((props: ArticleListItemProps) => {
         <AppLink
             data-testid="ArticleListItem"
             target={target}
-            to={getRouteArticleDetails('1')}
+            to={getRouteArticleDetails(article.id)}
             className={classNames(cls.ArticleListItem, {}, [
                 className,
                 cls[view],

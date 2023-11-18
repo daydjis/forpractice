@@ -31,7 +31,6 @@ export const renderArticleBlock = (block: ArticleBlock) => {
                     block={block}
                 />
             );
-        default:
-            return null;
+        default: return null;
     }
 };

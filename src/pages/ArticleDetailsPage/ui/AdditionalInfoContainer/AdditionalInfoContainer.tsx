@@ -5,7 +5,6 @@ import { Card } from '@/shared/ui/redesigned/Card';
 import { ArticleAdditionalInfo } from '@/widgets/ArticleAdditionalInfo';
 import { getArticleDetailsData } from '@/entities/Article';
 import cls from './AdditionalInfoContainer.module.scss';
-import { getRouteArticleEdit } from '@/shared/const/router';
 
 export const AdditionalInfoContainer = memo(() => {
     const article = useSelector(getArticleDetailsData);
@@ -13,10 +12,8 @@ export const AdditionalInfoContainer = memo(() => {
     const navigate = useNavigate();
 
     const onEditArticle = useCallback(() => {
-        if (article) {
-            navigate(getRouteArticleEdit('1'));
-        }
-    }, [article, navigate]);
+
+    }, [navigate]);
 
     if (!article) {
         return null;

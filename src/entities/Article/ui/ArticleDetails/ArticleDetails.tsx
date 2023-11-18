@@ -29,7 +29,7 @@ import {
     getArticleDetailsIsLoading,
 } from '../../model/selectors/articleDetails';
 import { renderArticleBlock } from './renderBlock';
-import { toggleFeatures, ToggleFeatures } from '@/shared/lib/features';
+import { toggleFeatures } from '@/shared/lib/features';
 import { AppImage } from '@/shared/ui/redesigned/AppImage';
 
 interface ArticleDetailsProps {
@@ -140,11 +140,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
         );
     } else {
         content = (
-            <ToggleFeatures
-                feature="isAppRedesigned"
-                on={<Redesigned />}
-                off={<Deprecated />}
-            />
+            <Redesigned/>
         );
     }
 

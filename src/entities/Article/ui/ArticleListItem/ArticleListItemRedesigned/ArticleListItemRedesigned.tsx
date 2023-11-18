@@ -78,7 +78,7 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
                     <HStack max justify="between">
                         <AppLink
                             target={target}
-                            to={getRouteArticleDetails('1')}
+                            to={getRouteArticleDetails(article?.id)}
                         >
                             <Button variant="outline">
                                 {t('Читать далее...')}
@@ -95,7 +95,7 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
         <AppLink
             data-testid="ArticleListItem"
             target={target}
-            to={getRouteArticleDetails('1')}
+            to={getRouteArticleDetails(article.id)}
             className={classNames(cls.ArticleListItem, {}, [
                 className,
                 cls[view],
