@@ -45,23 +45,37 @@ export const FriendsPage = ({className}: FriendsPageProps) => {
         'Возможные друзья': 'recevietInvites',
         'отправленные в друзья': 'sentInvites',
     }
+    const handleChange = () => {
+        let content;
 
-    const choiceArray = () => {
-        if (currentTab === "actualFriends" ) {
-            setcurrentArray(actualFriends)
+        if (currentTab === "actualFriends") {
+            content = (recevietInvites.map(user => <FriendCard
+                    key={user.user.id}
+                    isLoading={isLoading}
+                    InfoFriends={user}
+                />
+            ))
         }
-        if (currentTab === "recevietInvites" ) {
-            setcurrentArray(recevietInvites)
+        if (currentTab === "recevietInvites") {
+            content = (recevietInvites.map(user => <FriendCard
+                    key={user.user.id}
+                    isLoading={isLoading}
+                    InfoFriends={user}
+                />
+            ))
         }
-        if (currentTab === "sentInvites" ) {
-            setcurrentArray(sentInvites)
+        if (currentTab === "sentInvites") {
+            content = (sentInvites.map(user => <FriendCard
+                    key={user.user.id}
+                    isLoading={isLoading}
+                    InfoFriends={user}
+                />
+            ))
         }
     }
-
     const handleChangeTabs = (newTabs: string): void => {
         // @ts-ignore
         setCurrentTab(Tabs[newTabs])
-        choiceArray()
     }
 
     useEffect(() => {
@@ -81,13 +95,7 @@ export const FriendsPage = ({className}: FriendsPageProps) => {
                     <div className={classNames(cls.headerCard, {}, [])}>
                         <div  className={classNames(cls.Counter, {}, [])}>{currentArray.length}</div>
                     </div>
-                    {
-                        currentArray.map(user => <FriendCard
-                                key={user.user.id}
-                                isLoading={isLoading}
-                                InfoFriends={user}
-                            />
-                        )}
+                    {content}
                 </div>
             </div>
         </DynamicModuleLoader>

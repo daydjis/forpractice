@@ -125,7 +125,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
                             value={username}
                         />
                         <InputDeprecated
-                            type="text"
+                            type="password"
                             className={cls.input}
                             placeholder={t('Введите пароль')}
                             onChange={onChangePassword}
