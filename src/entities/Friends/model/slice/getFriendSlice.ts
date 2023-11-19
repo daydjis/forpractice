@@ -26,8 +26,11 @@ export const friendSlice = createSlice({
                 state.error = undefined;
                 state.isLoading = true;
             })
-            .addCase(getFriendList.fulfilled, (state) => {
+            .addCase(getFriendList.fulfilled, (state, action) => {
                 state.isLoading = false;
+                state.actual_friends = action.payload.actual_friends;
+                state.received_invites = action.payload.received_invites;
+                state.sent_invites = action.payload.sent_invites;
             })
             .addCase(getFriendList.rejected, (state, action) => {
                 state.isLoading = false;

@@ -17,6 +17,11 @@ export interface addFriendPost {
     message: string
 }
 
+export interface acceptFriendInvite {
+    id: number,
+    message: string
+}
+
 export interface FriendListSchema {
     isLoading: boolean,
     error: string | undefined,

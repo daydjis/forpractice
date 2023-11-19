@@ -4,7 +4,7 @@ import {
     getSentInvites,
     getError,
     getFriendListIsLoading,
-    getAllUsersList
+    getAllUsersList,
 } from './model/selectors/getFriendList/getReceivedInvites';
 import { addFriend } from './model/service/addFriend/addFriend';
 import { deleteFriend } from './model/service/deleteFriend/deleteFriend';

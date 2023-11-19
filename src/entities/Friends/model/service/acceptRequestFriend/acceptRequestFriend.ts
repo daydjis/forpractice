@@ -1,16 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
-import {addFriendPost, FriendListSchema} from '../../types/friendListSchema';
+import {acceptFriendInvite, addFriendPost, FriendListSchema} from '../../types/friendListSchema';
 
 export const acceptRequestFriend = createAsyncThunk<
     FriendListSchema,
-    addFriendPost,
+    acceptFriendInvite,
     ThunkConfig<string>
->('friend/addFriend', async (addData, thunkApi) => {
+>('friend/addFriend', async (acceptData, thunkApi) => {
     const { extra, dispatch, rejectWithValue } = thunkApi;
 
     try {
-        const response = await extra.api.post<FriendListSchema>(`/friends`, addData);
+        const response = await extra.api.post<FriendListSchema>(`/friends`, acceptData);
 
         return response.data;
     } catch (e) {

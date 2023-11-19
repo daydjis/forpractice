@@ -7,7 +7,8 @@ export interface User {
     age?: number,
     avatar?: string,
     city?: string,
-    country?: string
+    country?: string,
+    acceptId?: number,
 }
 
 export interface UserNew {

@@ -76,6 +76,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.FRIENDS]: {
         path: getRouteFriends(),
         element: <FriendsPage />,
+        authOnly: true,
     },
     // last
     [AppRoutes.NOT_FOUND]: {

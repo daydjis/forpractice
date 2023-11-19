@@ -19,6 +19,7 @@ interface FriendCardProps {
     isAddingNew: boolean;
     handleDeleteFriend: (id: number) => void
     handleAddFriend: (id: number) => void
+    handleAccept: (id: number) => void
 }
 
 export const FriendCard = (
@@ -29,13 +30,11 @@ export const FriendCard = (
         list,
         handleAddFriend,
         isAddingNew,
-        handleDeleteFriend
+        handleDeleteFriend,
+        handleAccept
 }: FriendCardProps) => {
     const dispatch = useAppDispatch()
 
-    useEffect(()=> {
-        console.log(list, "list")
-    })
     const {t} = useTranslation()
 
     if (isLoading) {
@@ -53,7 +52,7 @@ export const FriendCard = (
           </>
       )
     }
-    
+
     return (
         <div style={{marginTop: 20}} >
             {isAddingNew && <Input onChange={()=>{}} placeholder='Введите имя пользователя'/>}
@@ -83,7 +82,7 @@ export const FriendCard = (
                             {t('Удалить из друзей')}
                         </Button>}
                         {accept && <Button
-                            onClick={()=> {if (item.id) {handleDeleteFriend(item.id)}}}
+                            onClick={()=> {if (item.acceptId) {handleAccept(item.acceptId)}}}
                             type="submit">
                             {t('Принять заявку')}
                         </Button>}

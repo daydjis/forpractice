@@ -14,6 +14,7 @@ import {friendReducer,getUsersReducer,
 import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch";
 import {Button} from "@/shared/ui/redesigned/Button";
 import {FriendCard} from '@/widgets/FrienListUserCard';
+import {acceptRequestFriend} from "@/entities/Friends/model/service/acceptRequestFriend/acceptRequestFriend";
 
 interface FriendsListProps {
     className?: string;
@@ -61,6 +62,15 @@ export const FriendsList = ({className}: FriendsListProps) => {
         }
     }, [dispatch])
 
+    const handleAccept = useCallback((id: number) => {
+        if (id) {
+            dispatch(acceptRequestFriend({
+                id: id,
+                message: 'accept'
+            }))
+            dispatch(getFriendList(''))
+        }
+    }, [dispatch])
     const handleIsAddNewFriend = (newTabs: string) => {
         if(newTabs ===  'добавить в друзья') {
             setIsAddingFriend(true)
@@ -84,7 +94,6 @@ export const FriendsList = ({className}: FriendsListProps) => {
     }
 
     return (
-        <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
             <div className={classNames(cls.FriendsPage, {}, [])}>
                 <div  className={classNames(cls.headerCard, {}, [])}>
                     {Object.keys(Tabs).map(item =>
@@ -106,6 +115,7 @@ export const FriendsList = ({className}: FriendsListProps) => {
                         {`Человек в списке: ${ currentArray.length}`}
                     </div>}
                     <FriendCard
+                        handleAccept={handleAccept}
                         handleAddFriend={handleAddFriend}
                         accept={isAccept}
                         handleDeleteFriend={handleDeleteFriend}
@@ -115,7 +125,6 @@ export const FriendsList = ({className}: FriendsListProps) => {
                     />
                 </div>
             </div>
-        </DynamicModuleLoader>
     );
 };
 

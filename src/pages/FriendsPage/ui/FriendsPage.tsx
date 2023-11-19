@@ -1,11 +1,16 @@
 import { useEffect } from 'react';
-import { FriendsList, getAllUsers, getFriendList } from '@/entities/Friends';
+import {friendReducer, FriendsList, getAllUsers, getFriendList, getUsersReducer} from '@/entities/Friends';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import {DynamicModuleLoader, ReducersList} from "@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader";
 
 
 interface FriendsPageProps {
     className?: string;
 }
+const reducers: ReducersList = {
+    friendList: friendReducer,
+    getUsers: getUsersReducer
+};
 
 export const FriendsPage = ({className}: FriendsPageProps) => {
     const dispatch = useAppDispatch()
@@ -13,12 +18,13 @@ export const FriendsPage = ({className}: FriendsPageProps) => {
     useEffect(() => {
         dispatch(getFriendList(''))
         dispatch(getAllUsers(1))
-        console.log("render")
     }, [dispatch])
 
 
   return (
-      <FriendsList/>
+      <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
+        <FriendsList/>
+      </DynamicModuleLoader>
   )
 };
 
