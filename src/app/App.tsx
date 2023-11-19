@@ -13,6 +13,7 @@ import { AppLoaderLayout } from '@/shared/layouts/AppLoaderLayout';
 import { PageLoader } from '@/widgets/PageLoader';
 import { useAppToolbar } from './lib/useAppToolbar';
 import { withTheme } from './providers/ThemeProvider/ui/withTheme';
+import {LOCAL_STORAGE_LAST_DESIGN_KEY} from "@/shared/const/localstorage";
 
 const App = memo(() => {
     const { theme } = useTheme();
@@ -21,6 +22,10 @@ const App = memo(() => {
     const toolbar = useAppToolbar();
 
     useEffect(() => {
+        localStorage.setItem(
+            LOCAL_STORAGE_LAST_DESIGN_KEY,
+            'new'
+        );
         if (!inited) {
             dispatch(initAuthData());
         }
