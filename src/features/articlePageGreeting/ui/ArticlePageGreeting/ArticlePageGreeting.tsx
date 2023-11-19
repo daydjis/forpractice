@@ -12,7 +12,7 @@ export const ArticlePageGreeting = memo(() => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-            setIsOpen(true);
+            setIsOpen(false);
     }, [dispatch]);
 
     const onClose = () => setIsOpen(false);
