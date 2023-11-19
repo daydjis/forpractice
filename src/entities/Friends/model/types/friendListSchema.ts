@@ -19,7 +19,7 @@ export interface addFriendPost {
 
 export interface acceptFriendInvite {
     id: number,
-    message: string
+    message: boolean
 }
 
 export interface FriendListSchema {

@@ -66,7 +66,7 @@ export const FriendsList = ({className}: FriendsListProps) => {
         if (id) {
             dispatch(acceptRequestFriend({
                 id: id,
-                message: 'accept'
+                message: true
             }))
             dispatch(getFriendList(''))
         }
