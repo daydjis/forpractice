@@ -12,16 +12,19 @@ export const ArticlePageGreeting = memo(() => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-            setIsOpen(false);
+       // @ts-ignore
+        if( window.navigator?.userAgentData.platform === "macOS") {
+           setIsOpen(true);
+       }
     }, [dispatch]);
 
     const onClose = () => setIsOpen(false);
 
     const text = (
         <Text
-            title={t('Добро пожаловать на страницу статей')}
+            title={t('Добро пожаловать чел из батуми')}
             text={t(
-                'Здесь вы можете искать и просматривать статьи на различные темы',
+                'Поймали тебя за жопу',
             )}
         />
     );

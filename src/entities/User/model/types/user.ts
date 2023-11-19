@@ -8,6 +8,7 @@ export interface User {
     avatar?: string,
     city?: string,
     country?: string,
+    is_friend?: string,
     acceptId?: number,
 }
 

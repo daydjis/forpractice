@@ -35,7 +35,12 @@ export const FriendsPage = ({className}: FriendsPageProps) => {
 
   return (
       <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-        <FriendsList allUsers={allUsers} actualFriends={actualFriends} recevietInvites={recevietInvites} sentInvites={sentInvites}/>
+        <FriendsList
+            allUsers={allUsers}
+            actualFriends={actualFriends}
+            recevietInvites={recevietInvites}
+            sentInvites={sentInvites}
+        />
       </DynamicModuleLoader>
   )
 };
