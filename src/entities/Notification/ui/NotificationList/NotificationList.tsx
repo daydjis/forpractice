@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { VStack } from '@/shared/ui/redesigned/Stack';
 import { Skeleton as SkeletonDeprecated } from '@/shared/ui/deprecated/Skeleton';

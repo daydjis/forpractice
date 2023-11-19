@@ -1,13 +1,13 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
 
 export const getActualfriends = (state: StateSchema) =>
-    state.friendList?.actual_friends.map(item => ({...item.user, ...item.info, ...{acceptId: item.info.id}})) || []
+    state.friendList?.actual_friends.map(item => ({...item.user,  ...{acceptId: item.user.id}})) || []
 
 export const getReceivedInvites = (state: StateSchema) =>
-    state.friendList?.received_invites.map(item =>  ({...item.user, ...item.info, ...{acceptId: item.info.id}})) || []
+    state.friendList?.received_invites.map(item =>  ({...item.user, ...{acceptId: item.user.id} })) || []
 
 export const getSentInvites = (state: StateSchema) =>
-    state.friendList?.sent_invites.map(item => ({...item.user, ...item.info, ...{acceptId: item.info.id}})) || []
+    state.friendList?.sent_invites.map(item => ({...item.user,...{acceptId: item.user.id}})) || []
 
 export const getError = (state: StateSchema) =>
     state.addCommentForm?.error;

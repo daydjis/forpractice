@@ -18,9 +18,13 @@ import {acceptRequestFriend} from "@/entities/Friends/model/service/acceptReques
 
 interface FriendsListProps {
     className?: string;
+    actualFriends?:any;
+    recevietInvites?: any;
+    sentInvites?: any;
+    allUsers?: any;
 }
 
-export const FriendsList = ({className}: FriendsListProps) => {
+export const FriendsList = ({className, actualFriends, allUsers, sentInvites, recevietInvites}: FriendsListProps) => {
 
     const reducers: ReducersList = {
         friendList: friendReducer,
@@ -28,10 +32,6 @@ export const FriendsList = ({className}: FriendsListProps) => {
     };
 
     const dispatch = useAppDispatch()
-    const actualFriends = useSelector(getActualfriends)
-    const recevietInvites = useSelector(getReceivedInvites)
-    const sentInvites = useSelector(getSentInvites)
-    const allUsers = useSelector(getAllUsersList)
     const error = useSelector(getError)
     const isLoading = useSelector(getFriendListIsLoading)
 
@@ -47,6 +47,7 @@ export const FriendsList = ({className}: FriendsListProps) => {
         'отправленные заявки в друзья': sentInvites,
         'добавить в друзья': allUsers
     }
+
     const handleAddFriend = useCallback((id: number) => {
         dispatch(addFriend({
             friend_id: id,
