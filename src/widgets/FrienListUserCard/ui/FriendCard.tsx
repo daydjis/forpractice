@@ -1,55 +1,93 @@
-import React from 'react';
+import React, {memo, useEffect} from 'react';
+import { useTranslation } from 'react-i18next';
 import {classNames} from "@/shared/lib/classNames/classNames";
 import cls from "./FriendCard.module.scss"
-import {Friends} from "@/entities/Friends";
 import { Avatar } from '@/shared/ui/redesigned/Avatar';
 import {Text} from '@/shared/ui/redesigned/Text/Text'
 import { Skeleton } from '@/shared/ui/redesigned/Skeleton';
 import { Card } from '@/shared/ui/redesigned/Card';
 import { Input } from '@/shared/ui/redesigned/Input';
 import { Button } from '@/shared/ui/redesigned/Button';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import {User} from "@/entities/User";
 
 interface FriendCardProps {
+    accept?: boolean;
     className?: string;
     isLoading?: boolean;
-    list?: Array<Friends>;
-    isAddingNew: boolean
+    list?: Array<User>;
+    isAddingNew: boolean;
+    handleDeleteFriend: (id: number) => void
+    handleAddFriend: (id: number) => void
 }
 
-export const FriendCard = ({className, isLoading, list, isAddingNew}: FriendCardProps) => {
+export const FriendCard = (
+    {
+        className,
+        accept,
+        isLoading,
+        list,
+        handleAddFriend,
+        isAddingNew,
+        handleDeleteFriend
+}: FriendCardProps) => {
+    const dispatch = useAppDispatch()
+
+    useEffect(()=> {
+        console.log(list, "list")
+    })
+    const {t} = useTranslation()
+
     if (isLoading) {
       return (
           <>
             <Skeleton border="50px" height={100} width={100}/>
             <Skeleton  height={50} width={1200}/>
             <Skeleton  height={50} width={1200}/>
+              <Skeleton border="50px" height={100} width={100}/>
+              <Skeleton  height={50} width={1200}/>
+              <Skeleton  height={50} width={1200}/>
+              <Skeleton border="50px" height={100} width={100}/>
+              <Skeleton  height={50} width={1200}/>
+              <Skeleton  height={50} width={1200}/>
           </>
       )
     }
     
     return (
         <div style={{marginTop: 20}} >
-            {/* eslint-disable-next-line i18next/no-literal-string */}
             {isAddingNew && <Input onChange={()=>{}} placeholder='Введите имя пользователя'/>}
             {list?.map(item => (
-                <Card key={item.user.id} className={classNames(cls.FriendCard, {}, [className])} >
+                <Card key={item.id} className={classNames(cls.FriendCard, {}, [className])} >
                 <div  className={classNames(cls.Info, {}, [className])}>
-                    <Avatar src={item?.user.avatar} alt={item?.user.lastname} size={100}/>
+                    <Avatar src={item?.avatar} alt={item?.lastname} size={100}/>
                     <div  className={classNames(cls.ContainerFio, {}, [className])}>
-                        <Text title={`имя: ${ item?.user.lastname}`}/>
-                        <Text title={item?.user.name}/>
-                        <Text title={item?.user.login}/>
+                        <Text title={`имя: ${ item?.lastname}`}/>
+                        <Text title={item?.name}/>
+                        <Text title={item?.login}/>
                     </div>
                     <div  className={classNames(cls.ContainerInfo, {}, [className])}>
-                        <Text title={`город: ${  item?.user.city}`}/>
-                        <Text title={`Страна: ${  item?.user.country}`}/>
-                        <Text title={`Возраст: ${  item?.user?.age}`}/>
+                        <Text title={`город: ${  item?.city}`}/>
+                        <Text title={`Страна: ${  item?.country}`}/>
+                        <Text title={`Возраст: ${  item?.age}`}/>
                     </div>
                 </div>
                     <div className={classNames(cls.ContainerInfo, {}, [className])}>
-                        {isAddingNew && <Button>Добавить в друзья</Button>}
-                        {item.info && <Button type="reset" >Удалить из друзей</Button>}
-                        <Button>Написать сообщение</Button>
+                        {isAddingNew && <Button
+                            onClick={()=> {if (item.id) handleAddFriend(item.id)}}>
+                            {t('Добавить в друзья')}
+                        </Button>}
+                        {!isAddingNew && <Button
+                            onClick={()=> {if (item.id) {handleDeleteFriend(item.id)}}}
+                            type="submit">
+                            {t('Удалить из друзей')}
+                        </Button>}
+                        {accept && <Button
+                            onClick={()=> {if (item.id) {handleDeleteFriend(item.id)}}}
+                            type="submit">
+                            {t('Принять заявку')}
+                        </Button>}
+                        <Button>{t('Написать сообщение')}</Button>
                     </div>
                 </Card>
             ))
@@ -57,4 +95,4 @@ export const FriendCard = ({className, isLoading, list, isAddingNew}: FriendCard
     );
 };
 
-export default FriendCard
+export default memo(FriendCard)

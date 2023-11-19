@@ -2,9 +2,7 @@ import axios from 'axios';
 import { USER_LOCALSTORAGE_KEY } from '@/shared/const/localstorage';
 
 export const $api = axios.create({
-    // baseURL: __API__,
     baseURL: "https://backend-mu-dun.vercel.app",
-    // withCredentials: true,
     headers: {
         "Access-Control-Allow-Origin": "*",
         'Access-Control-Allow-Credentials':true

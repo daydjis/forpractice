@@ -17,7 +17,7 @@ import { UISchema } from '@/features/UI';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { ProfileSchema } from '@/features/editableProfileCard';
 import { RegistrationSchema } from "@/features/NewUserRegistration";
-import {FriendListSchema} from "../../../../entities/Friends/model/types/friendListSchema";
+import {FriendListSchema, getUsersSchema} from "../../../../entities/Friends/model/types/friendListSchema";
 
 export interface StateSchema {
     counter: CounterSchema;
@@ -34,6 +34,7 @@ export interface StateSchema {
     articlesPage?: ArticlesPageSchema;
     articleDetailsPage?: ArticleDetailsPageSchema;
     friendList?: FriendListSchema;
+    getUsers?: getUsersSchema
 }
 
 export type StateSchemaKey = keyof StateSchema;

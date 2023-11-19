@@ -14,6 +14,7 @@ export const getFriendList = createAsyncThunk<
     try {
         const response = await extra.api.get<FriendListSchema>('/friends',);
 
+        console.log(response.data, "response.data")
         dispatch(friendAction.setUser(response.data));
 
 

@@ -1,21 +1,20 @@
+import {User} from "@/entities/User";
+
+export interface UserIfno {
+    id: number,
+    user_id: number,
+    friend_id: number,
+    pending: boolean,
+    message: string
+}
 export interface Friends {
-    user: {
-        id: number,
-        login: string,
-        name: string,
-        lastname: string,
-        age: number,
-        avatar: string,
-        city: string,
-        country: string
-    },
-    info: {
-        id: number,
-        user_id: number,
-        friend_id: number,
-        pending: boolean,
-        message: string
-    }
+    user: User,
+    info: UserIfno
+}
+
+export interface addFriendPost {
+    friend_id: number,
+    message: string
 }
 
 export interface FriendListSchema {
@@ -25,4 +24,10 @@ export interface FriendListSchema {
     actual_friends: Array<Friends>
     sent_invites: Array<Friends>
     received_invites: Array<Friends>
+}
+
+export interface getUsersSchema {
+    isLoading?: boolean,
+    error?: string,
+    userList?: User[]
 }
