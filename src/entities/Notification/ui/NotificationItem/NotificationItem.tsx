@@ -1,20 +1,19 @@
 import { memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Card as CardDeprecated, CardTheme } from '@/shared/ui/deprecated/Card';
-import { Text as TextDeprecated } from '@/shared/ui/deprecated/Text';
 import { Text } from '@/shared/ui/redesigned/Text';
 import cls from './NotificationItem.module.scss';
-import { Notification } from '../../model/types/notification';
 import { ToggleFeatures } from '@/shared/lib/features';
 import { Card } from '@/shared/ui/redesigned/Card';
+import {User} from "@/entities/User";
 
 interface NotificationItemProps {
     className?: string;
-    item: Notification;
+    user?: User | undefined
 }
 
 export const NotificationItem = memo((props: NotificationItemProps) => {
-    const { className, item } = props;
+    const { className, user } = props;
 
     const content = (
         <ToggleFeatures
@@ -25,7 +24,7 @@ export const NotificationItem = memo((props: NotificationItemProps) => {
                         className,
                     ])}
                 >
-                    <Text title={item.title} text={item.description} />
+                    <Text title={"У Вас заявока в друзья от:" + user?.name} />
                 </Card>
             }
             off={
@@ -35,21 +34,17 @@ export const NotificationItem = memo((props: NotificationItemProps) => {
                         className,
                     ])}
                 >
-                    <TextDeprecated
-                        title={item.title}
-                        text={item.description}
-                    />
                 </CardDeprecated>
             }
         />
     );
 
-    if (item.href) {
+    if (user?.name) {
         return (
             <a
                 className={cls.link}
                 target="_blank"
-                href={item.href}
+                href={user?.name}
                 rel="noreferrer"
             >
                 {content}

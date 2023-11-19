@@ -1,8 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import {FriendListSchema} from '../../types/friendListSchema';
-import {friendAction} from '../../slice/getFriendSlice';
-
 
 export const getFriendList = createAsyncThunk<
     FriendListSchema,
@@ -13,10 +11,6 @@ export const getFriendList = createAsyncThunk<
 
     try {
         const response = await extra.api.get<FriendListSchema>('/friends',);
-
-        console.log(response.data, "response.data")
-        dispatch(friendAction.setUser(response.data));
-
 
         if (!response.data) {
             throw new Error();

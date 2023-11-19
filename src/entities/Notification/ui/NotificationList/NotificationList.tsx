@@ -7,12 +7,13 @@ import { useNotifications } from '../../api/notificationApi';
 import cls from './NotificationList.module.scss';
 import { NotificationItem } from '../NotificationItem/NotificationItem';
 import { toggleFeatures } from '@/shared/lib/features';
+import {Text} from "@/shared/ui/redesigned/Text";
 
 interface NotificationListProps {
     className?: string;
 }
 
-export const NotificationList = memo((props: NotificationListProps) => {
+export const NotificationList = (props: NotificationListProps) => {
     const { className } = props;
     const { data, isLoading } = useNotifications(null, {
         pollingInterval: 10000,
@@ -37,16 +38,19 @@ export const NotificationList = memo((props: NotificationListProps) => {
             </VStack>
         );
     }
-
+if(data) {
     return (
         <VStack
             gap="16"
             max
             className={classNames(cls.NotificationList, {}, [className])}
         >
-            {data?.map((item) => (
-                <NotificationItem key={item.id} item={item} />
-            ))}
+
+            {data && data.received_invites?.map((item) => (
+                    <NotificationItem key={item.user.id} user={item.user} />
+                ))}
+            {!data.received_invites.length  && <Text title={"У вас нет заявок в друзья вы никому не нужны"}/>}
         </VStack>
     );
-});
+}
+};
