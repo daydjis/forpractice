@@ -10,7 +10,7 @@ export const acceptRequestFriend = createAsyncThunk<
     const { extra, dispatch, rejectWithValue } = thunkApi;
 
     try {
-        const response = await extra.api.post<FriendListSchema>(`/friends`, acceptData);
+        const response = await extra.api.put<FriendListSchema>(`/friends`, acceptData);
 
         return response.data;
     } catch (e) {
