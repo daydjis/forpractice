@@ -1,24 +1,24 @@
 import { useTranslation } from 'react-i18next';
 import { Text } from '@/shared/ui/redesigned/Text';
 import { Link } from 'react-router-dom';
-import cls from './MainBar.module.scss';
+import cls from './MainPageContent.module.scss';
 
-export const MainBar = () => {
+export const MainPageContent = () => {
     const { t } = useTranslation();
     return (
         <div className={cls.wrapper}>
             <Text />
-            <div className={cls.firstBarDiv}>
-                <Link to="habr" className={cls.firstBarLinks}>
+            <div className={cls.containerLinks}>
+                <Link to="habr" className={cls.navbarLinks}>
                     <Text className={cls.textInLinks} text="Хабр" />
                 </Link>
-                <Link to="QA" className={cls.firstBarLinks}>
+                <Link to="QaPage" className={cls.navbarLinks}>
                     <Text className={cls.textInLinks} text="Q&A" />
                 </Link>
-                <Link to="career" className={cls.firstBarLinks}>
+                <Link to="career" className={cls.navbarLinks}>
                     <Text className={cls.textInLinks} text="Карьера" />
                 </Link>
-                <Link to="freelance" className={cls.firstBarLinks}>
+                <Link to="freelance" className={cls.navbarLinks}>
                     <Text className={cls.textInLinks} text="Фриланс" />
                 </Link>
             </div>

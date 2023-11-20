@@ -1,4 +1,4 @@
-.firstBarDiv {
+.containerLinks {
     display: flex;
     flex-wrap: wrap;
     margin-top: 10px;
@@ -8,10 +8,10 @@
     text-align: center;
     border-radius: 5px;
 }
-.firstBarDiv :hover{
+.containerLinks :hover{
     background-color: #111;
  }
- .firstBarLinks{
+ .navbarLinks{
     width: 25%;
  }
 .textInLinks{
@@ -20,7 +20,6 @@
 }
 .wrapper{
      width: 859px;
-    // max-width: calc(100vw - var(--sidebar-width)*1.54);
     overflow-x: hidden;
 }
 
@@ -102,8 +101,6 @@
   padding: 1vw 3vw;
 }
 
-/* ---------------------------------- */
-
 .container {
   perspective: 1000px;
   transform-style: preserve-3d;
@@ -116,10 +113,6 @@
     to {
       perspective-origin: 40% 60%;
     }
-    /* 
-      Move the fading to the containing element as to not break inside 3D transforms. 
-      See: https://css-tricks.com/things-watch-working-css-3d/
-    */
     from,
     to {
       opacity: 0;

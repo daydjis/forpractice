@@ -1,3 +1,3 @@
-import { QAAsync } from './ui/QA.async';
+import { QaPageAsync } from './ui/QaPage.async';
 
-export { QAAsync as QA };
+export { QaPageAsync as QaPage };

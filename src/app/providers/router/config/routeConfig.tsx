@@ -1,7 +1,7 @@
 import { MainPage } from '@/pages/MainPage';
 import { AboutPage } from '@/pages/AboutPage';
 import { ProfilePage } from '@/pages/ProfilePage';
-import {QA} from '@/pages/Q&A'
+import {QaPage} from '@/pages/Q&A'
 import { ArticlesPage } from '@/pages/ArticlesPage';
 import { ArticleDetailsPage } from '@/pages/ArticleDetailsPage';
 import { ArticleEditPage } from '@/pages/ArticleEditPage';
@@ -10,7 +10,7 @@ import { UserRole } from '@/entities/User';
 import { ForbiddenPage } from '@/pages/ForbiddenPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import {
-    getRouteQA,
+    getRouteQaPage,
     AppRoutes,
     getRouteAbout,
     getRouteAdmin,
@@ -39,9 +39,9 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         path: getRouteAbout(),
         element: <AboutPage />,
     },
-    [AppRoutes.QA]: {
-        path: getRouteQA(),
-        element: <QA />,
+    [AppRoutes.QaPage]: {
+        path: getRouteQaPage(),
+        element: <QaPage />,
     },
     [AppRoutes.PROFILE]: {
         path: getRouteProfile(':id'),

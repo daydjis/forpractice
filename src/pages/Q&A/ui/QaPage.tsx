@@ -1,17 +1,17 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Page } from '@/widgets/Page';
-import { Qa } from '@/entities/QA';
+import { QaPageContent } from '@/entities/QA';
 
-const QA = () => {
+const QaPage = () => {
     const { t } = useTranslation('Q&A');
 
     return (
-        <Page data-testid="QA">
+        <Page data-testid="QaPage">
             {t('Q&A')}
-            <Qa />
+            <QaPageContent />
         </Page>
     );
 };
 
-export default QA;
+export default QaPage;

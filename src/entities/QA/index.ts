@@ -1,3 +1,3 @@
-import { Qa } from './ui/Qa';
+import { QaPageContent } from './ui/QaPageContent';
 
-export {Qa}
+export {QaPageContent}

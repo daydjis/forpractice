@@ -1,3 +1,3 @@
-import { MainBar } from './ui/MainBar';
+import { MainPageContent } from './ui/MainPageContent';
 
-export {MainBar}
+export {MainPageContent}

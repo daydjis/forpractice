@@ -5,22 +5,19 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 export const AccordionItem = ({ faqItem }) => {
     const [hide, setHide] = useState(false);
     const clickHandler = () => {
-        setHide((e) => !e);
+        setHide((prevState) => !prevState);
     };
-    useEffect(() => {
-        console.log(faqItem);
-    });
     return (
         <li className={classNames(slc.accordionItem, {}, [])}>
             <button
                 className={classNames(slc.accordionHeader, {}, [])}
                 onClick={() => clickHandler()}
             >
-                {faqItem.q}
+                {faqItem.QaQuestions}
             </button>
             <div className={classNames(hide ? slc.open : slc.close, {}, [])}>
                 <div className={classNames(slc.accordionBody, {}, [])}>
-                    {faqItem.a}
+                    {faqItem.QaAnswers}
                 </div>
             </div>
         </li>
