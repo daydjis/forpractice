@@ -1,38 +1,67 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useMemo } from 'react';
 import {classNames} from "@/shared/lib/classNames/classNames";
 import cls from "./FriendList.module.scss"
 import {
-addFriend,deleteFriend,getFriendList} from '..';
-
+    addFriend, deleteFriend,
+} from '..';
 import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch";
-import {Button} from "@/shared/ui/redesigned/Button";
 import {FriendCard} from '@/widgets/FrienListUserCard';
 import {acceptRequestFriend} from '../model/service/acceptRequestFriend/acceptRequestFriend';
-import { useGetFriend } from '../model/service/apiFriend/FriendsApi';
+import { Button } from '@/shared/ui/redesigned/Button';
+import { User } from '@/entities/User';
+import { Input } from '@/shared/ui/redesigned/Input';
 
 interface FriendsListProps {
     className?: string;
-    allUsers?: any;
+    actualFriends?: Array<User>;
+    receivedInvites?:  Array<User>;
+    sentInvites?: Array<User>;
+    allUser?: Array<User>;
+    isLoading: boolean;
+    refreshFriend?: any;
 }
 
-export const FriendsList = ({className,  allUsers, }: FriendsListProps) => {
+interface Tabs {
+    tabs: string,
+    value: Array<User> | undefined
+}
 
-
+export const FriendsList = (
+    {
+        refreshFriend,
+        className,
+        actualFriends,
+        receivedInvites,
+        sentInvites, allUser,
+        isLoading
+    }: FriendsListProps) => {
     const dispatch = useAppDispatch()
-
     const [isAccept, setIsAccept] = useState(false)
+    const [currentTab, setCurrentTab] = useState('Мои друзья')
     const [isAddingFriend, setIsAddingFriend] = useState(false)
-    const {data,isLoading } = useGetFriend(null)
     const [
         currentArray,
         setCurrentArray
-    ] = useState(data?.actual_friends.map(item=> ({...item.user, acceptId: item.info.friend_id})) || [])
-    const Tabs = {
-        'Мои друзья': data?.actual_friends.map(item=> ({...item.user, acceptId: item.info.friend_id})),
-        'Полученные заявки в друзья': data?.received_invites.map(item=> ({...item.user, acceptId: item.info.friend_id})),
-        'отправленные заявки в друзья': data?.sent_invites.map(item=> ({...item.user, acceptId: item.info.friend_id})),
-        'добавить в друзья': allUsers
-    }
+    ] = useState(actualFriends)
+
+    const TabsInfo: Tabs[] = useMemo(()=> ([
+        {
+            tabs: 'Мои друзья',
+            value: actualFriends,
+        },
+        {
+            tabs: 'Полученные заявки в друзья',
+            value:  receivedInvites
+        },
+        {
+            tabs:  'отправленные заявки в друзья',
+            value: sentInvites
+        },
+        {
+            tabs:'добавить в друзья',
+            value: allUser
+        }
+    ]) ,[allUser, actualFriends, receivedInvites, sentInvites])
 
     const handleAddFriend = useCallback((id: number) => {
         // @ts-ignore
@@ -44,18 +73,19 @@ export const FriendsList = ({className,  allUsers, }: FriendsListProps) => {
 
     const handleDeleteFriend = useCallback((id: number) => {
         if (id) {
-            // @ts-ignore
             dispatch(deleteFriend(id))
         }
+        refreshFriend()
     }, [dispatch])
 
-    const handleAccept = useCallback((id: number) => {
-        if (id) {
+    const handleAccept = useCallback((userId: number) => {
+        if (userId) {
             // @ts-ignore
             dispatch(acceptRequestFriend({
-                id ,
+                id: userId ,
                 accept: true
             }))
+            refreshFriend()
         }
     }, [dispatch])
     const handleIsAddNewFriend = (newTabs: string) => {
@@ -71,50 +101,50 @@ export const FriendsList = ({className,  allUsers, }: FriendsListProps) => {
             setIsAccept(false)
         }
     }
-    const handleChangeTabs = (newTabs: any): void => {
-        // @ts-ignore
-        setCurrentArray(Tabs[newTabs])
-        handleIsAddNewFriend(newTabs)
-        // @ts-ignore
-        dispatch(getFriendList(null))
+    const handleChangeTabs = (newTabs: Tabs ): void => {
+        setCurrentTab(newTabs.tabs)
+        setCurrentArray(newTabs?.value)
+        handleIsAddNewFriend(newTabs?.tabs)
+        refreshFriend()
     }
 
-    if (data) {
     return (
             <div className={classNames(cls.FriendsPage, {}, [])}>
                 <div  className={classNames(cls.headerCard, {}, [])}>
-                    {Object.keys(Tabs).map(item =>
+                    {TabsInfo.map(item =>
                         <Button
-                            style={{
-                                borderRadius: 0
-                            }}
-                            size="m"
-                            key={item}
+                            style={
+                            {
+                                borderRadius: 0,
+                                backgroundColor: currentTab === item.tabs ? '#74a2b2' : 'transparent',
+                            }
+                        }
+                            key={item.tabs}
                             onClick={()=>handleChangeTabs(item)}
-                            title={item}
                         >
-                            {item}
+                            {item.tabs}
                         </Button>)
                     }
                 </div>
                 <div>
-                    {!isAddingFriend && <div className={classNames(cls.Counter, {}, [])}>
+                   <div className={classNames(cls.Counter, {}, [])}>
                         {`Человек в списке: ${ currentArray?.length}`}
-                    </div>}
-                    {data && currentArray?.map(item => (
+                    </div>
+                    <Input onChange={()=>{}} placeholder='Введите имя пользователя'/>
+                    {currentArray?.map(userinfo => (
                         <FriendCard
-                                key={item.user?.id}
+                                key={userinfo.id}
                                 handleAccept={handleAccept}
                                 handleAddFriend={handleAddFriend}
                                 accept={isAccept}
                                 handleDeleteFriend={handleDeleteFriend}
                                 isLoading={isLoading}
                                 isAddingNew={isAddingFriend}
-                                user={item}
+                                user={userinfo}
                             />
                      ))}
                 </div>
             </div>
     );
-};}
+};
 

@@ -6,7 +6,6 @@ import { Avatar } from '@/shared/ui/redesigned/Avatar';
 import {Text} from '@/shared/ui/redesigned/Text/Text'
 import { Skeleton } from '@/shared/ui/redesigned/Skeleton';
 import { Card } from '@/shared/ui/redesigned/Card';
-import { Input } from '@/shared/ui/redesigned/Input';
 import { Button } from '@/shared/ui/redesigned/Button';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import {User} from "@/entities/User";
@@ -15,7 +14,7 @@ interface FriendCardProps {
     accept?: boolean;
     className?: string;
     isLoading?: boolean;
-    user?: User;
+    user: User;
     isAddingNew: boolean;
     handleDeleteFriend: (id: number) => void
     handleAddFriend: (id: number) => void
@@ -52,44 +51,45 @@ export const FriendCard = (
           </>
       )
     }
-    if (user) {
-        return (
+    return (
         <div style={{marginTop: 20}} >
-            {user && <Input onChange={()=>{}} placeholder='Введите имя пользователя'/>}
-                <Card key={user.id} className={classNames(cls.FriendCard, {}, [className])} >
+                <Card key={user.id} style={{padding: 30}} className={classNames(cls.FriendCard, {}, [className])} >
                 <div  className={classNames(cls.Info, {}, [className])}>
                     <Avatar src={user?.avatar} alt={user?.lastname} size={100}/>
                     <div  className={classNames(cls.ContainerFio, {}, [className])}>
-                        <Text title={`имя: ${ user?.lastname}`}/>
-                        <Text title={user?.name}/>
-                        <Text title={user?.login}/>
+                        <Text title={`Фамилия: ${ user?.lastname}`}/>
+                        <Text title={`Имя: ${user?.name}`}/>
+                        <Text title={`Логин: ${user?.name}`}/>
                     </div>
                     <div  className={classNames(cls.ContainerInfo, {}, [className])}>
-                        <Text title={`город: ${  user?.city}`}/>
+                        <Text title={`Город: ${  user?.city}`}/>
                         <Text title={`Страна: ${  user?.country}`}/>
                         <Text title={`Возраст: ${  user?.age}`}/>
                     </div>
                 </div>
                     <div className={classNames(cls.ContainerInfo, {}, [className])}>
-                        {isAddingNew && <Button
+                        {isAddingNew && user.is_friend !== "YOU_REQUESTED_FRIENDSHIP" && <Button
                             onClick={()=> {if (user.id) handleAddFriend(user.id)}}>
                             {t('Добавить в друзья')}
                         </Button>}
-                        {!isAddingNew && <Button
+                        {!isAddingNew && !accept && user.is_friend === 'YOU_REQUESTED_FRIENDSHIP' && <Button
                             onClick={()=> {if (user.id) {handleDeleteFriend(user.id)}}}
                             type="submit">
                             {t('Удалить из друзей')}
                         </Button>}
                         {accept && <Button
-                            onClick={()=> {if (user.acceptId) {handleAccept(user.acceptId)}}}
+                            onClick={()=> {if (user.acceptId) {handleAccept(user.id)}}}
                             type="submit">
                             {t('Принять заявку')}
                         </Button>}
+                        {user.is_friend === 'YOU_REQUESTED_FRIENDSHIP' &&
+                            <Button disabled>{t('Заявка уже отправлена')}</Button>
+                        }
                         <Button>{t('Написать сообщение')}</Button>
                     </div>
                 </Card>
         </div>
     );
-    }};
+};
 
 export default memo(FriendCard)

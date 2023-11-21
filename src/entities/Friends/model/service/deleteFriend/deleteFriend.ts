@@ -9,7 +9,7 @@ export const deleteFriend = createAsyncThunk<
     const { extra, dispatch, rejectWithValue } = thunkApi;
 
     try {
-        const response = await extra.api.delete<null>(`/friends/${id}`,);
+        const response = await extra.api.delete(`/friends/${id}`,);
 
 
         return response.data;
