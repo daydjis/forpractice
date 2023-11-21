@@ -1,17 +1,16 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/shared/ui/redesigned/Button';
-import { classNames } from "@/shared/lib/classNames/classNames";
+import { classNames } from '@/shared/lib/classNames/classNames';
 import { AccordionItem } from '@/shared/ui/redesigned/accordion/collapse';
-import slc from './QaPageContent.module.scss'
+import slc from './QaPageContent.module.scss';
 
 interface faqList {
-    QaQuestions: string,
-    QaAnswers: string,
+    QaQuestions: string;
+    QaAnswers: string;
 }
 
 export const QaPageContent = () => {
-
     const faqList: faqList[] = [
         {
             QaQuestions: 'Не помню свой пароль, что делать?',
@@ -30,7 +29,7 @@ export const QaPageContent = () => {
             QaAnswers: 'Евгений',
         },
     ];
-    const {t} = useTranslation()
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const handleRedirect = () => {
         navigate('/', { replace: true });
@@ -40,13 +39,12 @@ export const QaPageContent = () => {
         <>
             <ul className={classNames(slc.accordion, {}, [])}>
                 {faqList.map((item) => {
-                    return <AccordionItem faqItem={item} key={item.QaAnswers} />;
+                    return (
+                        <AccordionItem faqItem={item} key={item.QaAnswers} />
+                    );
                 })}
             </ul>
-            <Button
-                size="m"
-                onClick={handleRedirect}
-                >
+            <Button size="m" onClick={handleRedirect}>
                 {t('На главную')}
             </Button>
         </>

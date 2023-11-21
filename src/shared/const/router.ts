@@ -16,15 +16,19 @@ export enum AppRoutes {
 }
 
 export const getRouteMain = () => '/';
-export const getRouteQaPage = () => 'QaPage'
+export const getRouteQaPage = () => 'QaPage';
 export const getRouteSettings = () => '/settings';
 export const getRouteAbout = () => '/about';
-export const getRouteProfile = (id: number | string | undefined) => `/profile/${id}`;
+export const getRouteProfile = (id: number | string | undefined) =>
+    `/profile/${id}`;
 export const getRouteArticles = () => '/articles';
-export const getRouteFriends = () => '/friends'
-export const getRouteArticleDetails = (id: number| string | undefined) => `/articles/${id}`;
+export const getRouteFriends = () => '/friends';
+export const getRouteQa = () => '/QaPage';
+export const getRouteArticleDetails = (id: number | string | undefined) =>
+    `/articles/${id}`;
 export const getRouteArticleCreate = () => '/articles/new';
-export const getRouteArticleEdit = (id: number| string | undefined) => `/articles/${id}/edit`;
+export const getRouteArticleEdit = (id: number | string | undefined) =>
+    `/articles/${id}/edit`;
 export const getRouteAdmin = () => '/admin';
 export const getRouteForbidden = () => '/forbidden';
 
@@ -40,5 +44,5 @@ export const AppRouteByPathPattern: Record<string, AppRoutes> = {
     [getRouteArticleEdit(':id')]: AppRoutes.ARTICLE_EDIT,
     [getRouteAdmin()]: AppRoutes.ADMIN_PANEL,
     [getRouteForbidden()]: AppRoutes.FORBIDDEN,
-    [getRouteFriends()]: AppRoutes.FRIENDS
+    [getRouteFriends()]: AppRoutes.FRIENDS,
 };

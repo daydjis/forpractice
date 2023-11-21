@@ -95,6 +95,7 @@ const RegistrationFrom = memo(({ className, onSuccess }: RegisterFormProps) => {
     );
 
     const onLoginClick = useCallback(async () => {
+        // @ts-ignore
         const result = await dispatch(registrationNewUser(username));
         if (result.meta.requestStatus === 'fulfilled') {
             onSuccess();

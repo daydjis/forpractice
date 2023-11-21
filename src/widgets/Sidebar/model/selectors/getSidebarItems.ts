@@ -9,19 +9,19 @@ import MainIcon from '@/shared/assets/icons/home.svg';
 import ArticleIcon from '@/shared/assets/icons/article.svg';
 import AboutIcon from '@/shared/assets/icons/Info.svg';
 import ProfileIcon from '@/shared/assets/icons/avatar.svg';
-import FriendsIcon from '@/shared/assets/icons/friends.svg'
+import FriendsIcon from '@/shared/assets/icons/friends.svg';
+import QAIcon from '@/shared/assets/icons/magnifying.svg';
 
 import { SidebarItemType } from '../types/sidebar';
 import {
     getRouteAbout,
     getRouteArticles,
+    getRouteFriends,
     getRouteMain,
     getRouteProfile,
-    getRouteFriends,
+    getRouteQa,
 } from '@/shared/const/router';
 import { toggleFeatures } from '@/shared/lib/features';
-
-
 
 export const useSidebarItems = () => {
     const userData = useSelector(getUserAuthData);
@@ -76,6 +76,16 @@ export const useSidebarItems = () => {
                     on: () => FriendsIcon,
                 }),
                 text: 'Мои друзья',
+                authOnly: true,
+            },
+            {
+                path: getRouteQa(),
+                Icon: toggleFeatures({
+                    name: 'isAppRedesigned',
+                    off: () => QAIcon,
+                    on: () => QAIcon,
+                }),
+                text: 'Q&A',
                 authOnly: true,
             },
         );
