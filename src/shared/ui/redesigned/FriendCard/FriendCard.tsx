@@ -2,14 +2,25 @@ import React, {memo} from 'react';
 import { useTranslation } from 'react-i18next';
 import {classNames} from "@/shared/lib/classNames/classNames";
 import cls from "./FriendCard.module.scss"
-import { Avatar } from '@/shared/ui/redesigned/Avatar';
-import {Text} from '@/shared/ui/redesigned/Text/Text'
-import { Skeleton } from '@/shared/ui/redesigned/Skeleton';
-import { Card } from '@/shared/ui/redesigned/Card';
-import { Button } from '@/shared/ui/redesigned/Button';
+import { Avatar } from '../Avatar';
+import {Text} from '../Text'
+import { Skeleton } from '../Skeleton';
+import { Card } from '../Card';
+import { Button } from '../Button';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import {User} from "@/entities/User";
 
+export interface User {
+    id?: number,
+    login?: string,
+    name?: string,
+    lastname?: string,
+    age?: number,
+    avatar?: string,
+    city?: string,
+    country?: string,
+    is_friend?: string,
+    acceptId?: number,
+}
 interface FriendCardProps {
     accept?: boolean;
     className?: string;
@@ -31,7 +42,8 @@ export const FriendCard = (
         isAddingNew,
         handleDeleteFriend,
         handleAccept
-}: FriendCardProps) => {
+}: FriendCardProps
+) => {
     const dispatch = useAppDispatch()
 
     const {t} = useTranslation()
@@ -78,7 +90,7 @@ export const FriendCard = (
                             {t('Удалить из друзей')}
                         </Button>}
                         {accept && <Button
-                            onClick={()=> {if (user.acceptId) {handleAccept(user.id)}}}
+                            onClick={()=> {if (user.id) {handleAccept(user.id)}}}
                             type="submit">
                             {t('Принять заявку')}
                         </Button>}

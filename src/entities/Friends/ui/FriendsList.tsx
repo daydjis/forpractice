@@ -5,7 +5,7 @@ import {
     addFriend, deleteFriend,
 } from '..';
 import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch";
-import {FriendCard} from '@/widgets/FrienListUserCard';
+import {FriendCard} from '@/widgets/FrienListUserCard/ui';
 import {acceptRequestFriend} from '../model/service/acceptRequestFriend/acceptRequestFriend';
 import { Button } from '@/shared/ui/redesigned/Button';
 import { User } from '@/entities/User';

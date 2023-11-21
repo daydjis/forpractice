@@ -80,7 +80,9 @@ const RegistrationFrom = memo(({ className, onSuccess }: RegisterFormProps) => {
 
     const onChangeAge = useCallback(
         (value: string) => {
-            dispatch(registerActions.setAge(Number(value)));
+            if (Number(value) !< 0) {
+                dispatch(registerActions.setAge(Number(value)));
+            }
         },
         [dispatch],
     );
