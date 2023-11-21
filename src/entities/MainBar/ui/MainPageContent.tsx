@@ -1,13 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import { Text } from '@/shared/ui/redesigned/Text';
 import { Link } from 'react-router-dom';
+import { Text } from '@/shared/ui/redesigned/Text';
 import cls from './MainPageContent.module.scss';
 
 export const MainPageContent = () => {
     const { t } = useTranslation();
     return (
         <div className={cls.wrapper}>
-            <Text />
             <div className={cls.containerLinks}>
                 <Link to="habr" className={cls.navbarLinks}>
                     <Text className={cls.textInLinks} text="Хабр" />
@@ -22,7 +21,7 @@ export const MainPageContent = () => {
                     <Text className={cls.textInLinks} text="Фриланс" />
                 </Link>
             </div>
-            <div className={cls.test}>
+            <div className={cls.AnimationFrame}>
                 <div className={cls.container}>
                     <main>
                         <header>
@@ -92,9 +91,9 @@ export const MainPageContent = () => {
                     href="https://youtu.be/cxwZfcoiUSE"
                     target="_blank"
                     data-keyframers-credit
-                    style={{ color: '#ffffff', zIndex: 10 }}
-                ></a>
-                <script src="https://codepen.io/shshaw/pen/QmZYMG.js"></script>
+                    style={{ color: '#ffffff', zIndex: 10 }} rel="noreferrer"
+                 />
+                <script src="https://codepen.io/shshaw/pen/QmZYMG.js" />
             </div>
         </div>
     );

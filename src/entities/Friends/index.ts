@@ -12,7 +12,7 @@ import { getAllUsers } from './model/service/getAllusers/getAllusers';
 import {getFriendList} from './model/service/getFriendList/getFrineList';
 import { getUsersReducer } from './model/slice/getAllUsers';
 import {friendReducer} from './model/slice/getFriendSlice';
-import { Friends } from './model/types/friendListSchema';
+import { FriendListSchema, Friends } from './model/types/friendListSchema';
 import { FriendsList } from './ui/FriendsList';
 
 
@@ -30,3 +30,4 @@ export {getAllUsersList}
 export {deleteFriend}
 export {addFriend}
 export {FriendsList}
+export type { FriendListSchema }

@@ -1,14 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import slc from './accordion.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
-export const AccordionItem = ({ faqItem }) => {
+
+interface AccordionItemProps {
+    faqItem: any
+}
+export const AccordionItem = (props: AccordionItemProps) => {
+
+    const { faqItem } = props
+
     const [hide, setHide] = useState(false);
     const clickHandler = () => {
         setHide((prevState) => !prevState);
     };
     return (
-        <li className={classNames(slc.accordionItem, {}, [])}>
+        <li className={classNames(slc.accordionItem, {}, [])} key={faqItem.QaQuestions}>
             <button
                 className={classNames(slc.accordionHeader, {}, [])}
                 onClick={() => clickHandler()}

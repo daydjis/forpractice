@@ -1,75 +1,61 @@
-import React, {useCallback, useState} from 'react';
-import {useTranslation} from "react-i18next";
-import { useSelector } from 'react-redux';
+import React, { useCallback, useState } from 'react';
 import {classNames} from "@/shared/lib/classNames/classNames";
 import cls from "./FriendList.module.scss"
-import {DynamicModuleLoader, ReducersList} from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import {friendReducer,getUsersReducer,
-    getActualfriends,
-    getAllUsersList, getError, getFriendListIsLoading,
-    getReceivedInvites,
-    getSentInvites
-,addFriend,deleteFriend,getFriendList} from '..';
+import {
+addFriend,deleteFriend,getFriendList} from '..';
 
 import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch";
 import {Button} from "@/shared/ui/redesigned/Button";
 import {FriendCard} from '@/widgets/FrienListUserCard';
-import {acceptRequestFriend} from "@/entities/Friends/model/service/acceptRequestFriend/acceptRequestFriend";
+import {acceptRequestFriend} from '../model/service/acceptRequestFriend/acceptRequestFriend';
+import { useGetFriend } from '../model/service/apiFriend/FriendsApi';
 
 interface FriendsListProps {
     className?: string;
-    actualFriends?:any;
-    recevietInvites?: any;
-    sentInvites?: any;
     allUsers?: any;
 }
 
-export const FriendsList = ({className, actualFriends, allUsers, sentInvites, recevietInvites}: FriendsListProps) => {
+export const FriendsList = ({className,  allUsers, }: FriendsListProps) => {
 
-    const reducers: ReducersList = {
-        friendList: friendReducer,
-        getUsers: getUsersReducer
-    };
 
     const dispatch = useAppDispatch()
-    const error = useSelector(getError)
-    const isLoading = useSelector(getFriendListIsLoading)
 
-
-    const {t} = useTranslation()
     const [isAccept, setIsAccept] = useState(false)
     const [isAddingFriend, setIsAddingFriend] = useState(false)
-    const [currentArray, setCurrentArray] = useState([])
-
+    const {data,isLoading } = useGetFriend(null)
+    const [
+        currentArray,
+        setCurrentArray
+    ] = useState(data?.actual_friends.map(item=> ({...item.user, acceptId: item.info.friend_id})) || [])
     const Tabs = {
-        'Мои друзья': actualFriends,
-        'Полученные заявки в друзья': recevietInvites,
-        'отправленные заявки в друзья': sentInvites,
+        'Мои друзья': data?.actual_friends.map(item=> ({...item.user, acceptId: item.info.friend_id})),
+        'Полученные заявки в друзья': data?.received_invites.map(item=> ({...item.user, acceptId: item.info.friend_id})),
+        'отправленные заявки в друзья': data?.sent_invites.map(item=> ({...item.user, acceptId: item.info.friend_id})),
         'добавить в друзья': allUsers
     }
 
     const handleAddFriend = useCallback((id: number) => {
+        // @ts-ignore
         dispatch(addFriend({
             friend_id: id,
-            message: 'invite'
-        }))
-        dispatch(getFriendList(''))
+            message: 'invite' }
+        ))
     },[dispatch])
 
     const handleDeleteFriend = useCallback((id: number) => {
         if (id) {
+            // @ts-ignore
             dispatch(deleteFriend(id))
-            dispatch(getFriendList(''))
         }
     }, [dispatch])
 
     const handleAccept = useCallback((id: number) => {
         if (id) {
+            // @ts-ignore
             dispatch(acceptRequestFriend({
-                id: id,
+                id ,
                 accept: true
             }))
-            dispatch(getFriendList(''))
         }
     }, [dispatch])
     const handleIsAddNewFriend = (newTabs: string) => {
@@ -87,13 +73,13 @@ export const FriendsList = ({className, actualFriends, allUsers, sentInvites, re
     }
     const handleChangeTabs = (newTabs: any): void => {
         // @ts-ignore
-        console.log(Tabs[newTabs])
-        // @ts-ignore
         setCurrentArray(Tabs[newTabs])
         handleIsAddNewFriend(newTabs)
-        dispatch(getFriendList(''))
+        // @ts-ignore
+        dispatch(getFriendList(null))
     }
 
+    if (data) {
     return (
             <div className={classNames(cls.FriendsPage, {}, [])}>
                 <div  className={classNames(cls.headerCard, {}, [])}>
@@ -113,19 +99,22 @@ export const FriendsList = ({className, actualFriends, allUsers, sentInvites, re
                 </div>
                 <div>
                     {!isAddingFriend && <div className={classNames(cls.Counter, {}, [])}>
-                        {`Человек в списке: ${ currentArray.length}`}
+                        {`Человек в списке: ${ currentArray?.length}`}
                     </div>}
-                    <FriendCard
-                        handleAccept={handleAccept}
-                        handleAddFriend={handleAddFriend}
-                        accept={isAccept}
-                        handleDeleteFriend={handleDeleteFriend}
-                        isLoading={isLoading}
-                        isAddingNew={isAddingFriend}
-                        list={currentArray}
-                    />
+                    {data && currentArray?.map(item => (
+                        <FriendCard
+                                key={item.user?.id}
+                                handleAccept={handleAccept}
+                                handleAddFriend={handleAddFriend}
+                                accept={isAccept}
+                                handleDeleteFriend={handleDeleteFriend}
+                                isLoading={isLoading}
+                                isAddingNew={isAddingFriend}
+                                user={item}
+                            />
+                     ))}
                 </div>
             </div>
     );
-};
+};}
 

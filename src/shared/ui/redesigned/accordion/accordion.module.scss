@@ -1,67 +1,54 @@
 
 .accordionItem {
     margin-bottom: 16px;
-    background-color: #ffffff;
     border-radius: 7px;
+    background-color: transparent;
 }
 .accordionHeader {
+    background-color: var(--light-bg-redesigned);
+    color: var(--text-redisigned);
     position: relative;
     width: 100%;
-    padding: 20px 60px 20px 30px;
-    background-color: #ffffff;
+    padding: 20px;
     border: 0;
-    border-radius: 7px;
-    font-size: 22px;
-    text-align: left;
+    border-radius: 20px;
     cursor: pointer;
+    font-size: var(--font-size-l);
+
+    & {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
 }
+
 .accordionCollapse {
     height: 0;
     overflow: hidden;
     transition: height 0.3s;
 }
 .accordionBody{
-    color: black;
-    font-size: 20px;
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
-    background-color: #ffffff;
-    padding: 30px, 60px, 30px, 30px
+    color: var(--text-redesigned);
+    font-size: var(--font-size-m);
 }
+
 .open{
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: hz 10s ease infinite;
     height: 200px;
     overflow: hidden;
-    transition: height 0.3s;
+    transition: height 0.5s;
+    border: 2px solid var(--light-bg-redesigned);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+
 }
+
 .close{
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: hz reverse 10s ease infinite;
     height: 0;
     overflow: hidden;
-    transition: height 0.3s;
-}
-
- @keyframes hz {   
-0% {     
-    background-color: pink;
-    height: 0;   
-    }   
-50% {     
-    background-color: yellow;
-    height: 100px;   
-    } 
-70%{
-    background-color: green;
-    height: 250px;
-    }
-100% {
-    background-color: blue;
-    height: 200px;
-     }
+    transition: height 0.5s ease;
 }

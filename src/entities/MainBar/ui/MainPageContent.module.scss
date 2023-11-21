@@ -1,33 +1,25 @@
 .containerLinks {
     display: flex;
-    flex-wrap: wrap;
-    margin-top: 10px;
-    justify-content: space-around;
-    background-color: #333;
-    height: 40px;
-    text-align: center;
+    background-color: var(--light-bg-redesigned);
     border-radius: 5px;
 }
 .containerLinks :hover{
-    background-color: #111;
+    background-color: var(--dark-bg-redesigned);
  }
  .navbarLinks{
-    width: 25%;
+    max-width: 250px;
+    width: 100%;
  }
 .textInLinks{
     text-align: center;
     margin-top: 5px;
 }
 .wrapper{
-     width: 859px;
-    overflow-x: hidden;
+  width: calc(90vw - var(--sidebar-width));
+  overflow-x: hidden;
 }
 
-
-
-
-
-.test {
+.AnimationFrame {
   background: transparent;
   color: #fff;
   height: auto;
@@ -37,7 +29,6 @@
 }
 
 .main {
-  background: #111;
   border: solid 1px #222;
   width: 100%;
   margin: 0 auto;
@@ -92,7 +83,6 @@
 
 .callout {
   text-align: center;
-  background-color: #3173fa;
 
   > p {
     color: white;
@@ -102,7 +92,7 @@
 }
 
 .container {
-  perspective: 1000px;
+  perspective: 1200px;
   transform-style: preserve-3d;
 
   animation: cinematic-camera 11s cubic-bezier(0.6, 0, 0.4, 1) both infinite;
@@ -125,7 +115,6 @@
 
   &:after {
     content: "";
-    background: linear-gradient(to bottom, #000, #0000 20%, #0000 80%, #000);
     position: absolute;
     top: 0;
     left: 0;

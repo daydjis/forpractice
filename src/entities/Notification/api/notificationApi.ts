@@ -1,5 +1,5 @@
 import { rtkApi } from '@/shared/api/rtkApi';
-import {FriendListSchema} from "@/entities/Friends/model/types/friendListSchema";
+import { FriendListSchema } from '@/entities/Friends';
 
 const notificationApi = rtkApi.injectEndpoints({
     endpoints: (build) => ({

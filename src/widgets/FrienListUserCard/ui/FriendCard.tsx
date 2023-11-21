@@ -1,4 +1,4 @@
-import React, {memo, useEffect} from 'react';
+import React, {memo} from 'react';
 import { useTranslation } from 'react-i18next';
 import {classNames} from "@/shared/lib/classNames/classNames";
 import cls from "./FriendCard.module.scss"
@@ -15,7 +15,7 @@ interface FriendCardProps {
     accept?: boolean;
     className?: string;
     isLoading?: boolean;
-    list?: Array<User>;
+    user?: User;
     isAddingNew: boolean;
     handleDeleteFriend: (id: number) => void
     handleAddFriend: (id: number) => void
@@ -27,7 +27,7 @@ export const FriendCard = (
         className,
         accept,
         isLoading,
-        list,
+        user,
         handleAddFriend,
         isAddingNew,
         handleDeleteFriend,
@@ -40,9 +40,9 @@ export const FriendCard = (
     if (isLoading) {
       return (
           <>
-            <Skeleton border="50px" height={100} width={100}/>
-            <Skeleton  height={50} width={1200}/>
-            <Skeleton  height={50} width={1200}/>
+              <Skeleton border="50px" height={100} width={100}/>
+              <Skeleton  height={50} width={1200}/>
+              <Skeleton  height={50} width={1200}/>
               <Skeleton border="50px" height={100} width={100}/>
               <Skeleton  height={50} width={1200}/>
               <Skeleton  height={50} width={1200}/>
@@ -52,46 +52,44 @@ export const FriendCard = (
           </>
       )
     }
-
-    return (
+    if (user) {
+        return (
         <div style={{marginTop: 20}} >
-            {isAddingNew && <Input onChange={()=>{}} placeholder='Введите имя пользователя'/>}
-            {list?.map(item => (
-                <Card key={item.id} className={classNames(cls.FriendCard, {}, [className])} >
+            {user && <Input onChange={()=>{}} placeholder='Введите имя пользователя'/>}
+                <Card key={user.id} className={classNames(cls.FriendCard, {}, [className])} >
                 <div  className={classNames(cls.Info, {}, [className])}>
-                    <Avatar src={item?.avatar} alt={item?.lastname} size={100}/>
+                    <Avatar src={user?.avatar} alt={user?.lastname} size={100}/>
                     <div  className={classNames(cls.ContainerFio, {}, [className])}>
-                        <Text title={`имя: ${ item?.lastname}`}/>
-                        <Text title={item?.name}/>
-                        <Text title={item?.login}/>
+                        <Text title={`имя: ${ user?.lastname}`}/>
+                        <Text title={user?.name}/>
+                        <Text title={user?.login}/>
                     </div>
                     <div  className={classNames(cls.ContainerInfo, {}, [className])}>
-                        <Text title={`город: ${  item?.city}`}/>
-                        <Text title={`Страна: ${  item?.country}`}/>
-                        <Text title={`Возраст: ${  item?.age}`}/>
+                        <Text title={`город: ${  user?.city}`}/>
+                        <Text title={`Страна: ${  user?.country}`}/>
+                        <Text title={`Возраст: ${  user?.age}`}/>
                     </div>
                 </div>
                     <div className={classNames(cls.ContainerInfo, {}, [className])}>
                         {isAddingNew && <Button
-                            onClick={()=> {if (item.id) handleAddFriend(item.id)}}>
+                            onClick={()=> {if (user.id) handleAddFriend(user.id)}}>
                             {t('Добавить в друзья')}
                         </Button>}
                         {!isAddingNew && <Button
-                            onClick={()=> {if (item.id) {handleDeleteFriend(item.id)}}}
+                            onClick={()=> {if (user.id) {handleDeleteFriend(user.id)}}}
                             type="submit">
                             {t('Удалить из друзей')}
                         </Button>}
                         {accept && <Button
-                            onClick={()=> {if (item.acceptId) {handleAccept(item.acceptId)}}}
+                            onClick={()=> {if (user.acceptId) {handleAccept(user.acceptId)}}}
                             type="submit">
                             {t('Принять заявку')}
                         </Button>}
                         <Button>{t('Написать сообщение')}</Button>
                     </div>
                 </Card>
-            ))
-        }</div>
+        </div>
     );
-};
+    }};
 
 export default memo(FriendCard)

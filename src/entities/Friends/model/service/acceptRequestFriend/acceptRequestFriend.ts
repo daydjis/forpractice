@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
-import {acceptFriendInvite, addFriendPost, FriendListSchema} from '../../types/friendListSchema';
+import {acceptFriendInvite, FriendListSchema} from '../../types/friendListSchema';
 
 export const acceptRequestFriend = createAsyncThunk<
     FriendListSchema,

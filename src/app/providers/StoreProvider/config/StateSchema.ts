@@ -14,7 +14,6 @@ import { ArticleDetailsPageSchema } from '@/pages/ArticleDetailsPage';
 import { AddCommentFormSchema } from '@/features/addCommentForm';
 import { ArticlesPageSchema } from '@/pages/ArticlesPage';
 import { UISchema } from '@/features/UI';
-import { rtkApi } from '@/shared/api/rtkApi';
 import { ProfileSchema } from '@/features/editableProfileCard';
 import { RegistrationSchema } from "@/features/NewUserRegistration";
 import {FriendListSchema, getUsersSchema} from "../../../../entities/Friends/model/types/friendListSchema";

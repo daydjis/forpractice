@@ -3,7 +3,7 @@ import { ThunkConfig } from '@/app/providers/StoreProvider';
 import {addFriendPost, FriendListSchema} from '../../types/friendListSchema';
 
 export const addFriend = createAsyncThunk<
-    FriendListSchema,
+    any,
     addFriendPost,
     ThunkConfig<string>
 >('friend/addFriend', async (addData, thunkApi) => {

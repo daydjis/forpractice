@@ -5,7 +5,7 @@ import {FriendListSchema} from '../../types/friendListSchema';
 export const getFriendList = createAsyncThunk<
     FriendListSchema,
     string,
-    ThunkConfig<string>
+    ThunkConfig<null>
 >('friend/getFriendList', async (UserNew, thunkApi) => {
     const { extra, dispatch, rejectWithValue } = thunkApi;
 
