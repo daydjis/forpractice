@@ -1,17 +1,11 @@
 .FriendsPage {
 
 }
-
 .headerCard {
   display: flex;
+  justify-content: space-between;
+  border: 2px solid #74a2b2;
+  height: 50px;
+  border-radius: 25px;
 }
-.Counter {
-  border-radius: 5px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--icon-redesigned);
-  color: var(--text-redesigned);
-}
+

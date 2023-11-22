@@ -1,22 +1,17 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './FriendList.module.scss';
 import { addFriend, deleteFriend } from '..';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { FriendCard } from '@/shared/ui/redesigned/FriendCard';
 import { acceptRequestFriend } from '../model/service/acceptRequestFriend/acceptRequestFriend';
-import { Button } from '@/shared/ui/redesigned/Button';
 import { User } from '@/entities/User';
 import { Input } from '@/shared/ui/redesigned/Input';
 
 interface FriendsListProps {
     className?: string;
     actualFriends?: Array<User>;
-    receivedInvites?: Array<User>;
-    sentInvites?: Array<User>;
-    allUser?: Array<User>;
     isLoading: boolean;
-    refreshFriend?: any;
 }
 
 interface Tabs {
@@ -25,41 +20,11 @@ interface Tabs {
 }
 
 export const FriendsList = ({
-    refreshFriend,
-    className,
     actualFriends,
-    receivedInvites,
-    sentInvites,
-    allUser,
     isLoading,
+    className,
 }: FriendsListProps) => {
     const dispatch = useAppDispatch();
-    const [isAccept, setIsAccept] = useState(false);
-    const [currentTab, setCurrentTab] = useState('Мои друзья');
-    const [isAddingFriend, setIsAddingFriend] = useState(false);
-    const [currentArray, setCurrentArray] = useState(actualFriends);
-
-    const TabsInfo: Tabs[] = useMemo(
-        () => [
-            {
-                tabs: 'Мои друзья',
-                value: actualFriends,
-            },
-            {
-                tabs: 'Полученные заявки в друзья',
-                value: receivedInvites,
-            },
-            {
-                tabs: 'отправленные заявки в друзья',
-                value: sentInvites,
-            },
-            {
-                tabs: 'добавить в друзья',
-                value: allUser,
-            },
-        ],
-        [allUser, actualFriends, receivedInvites, sentInvites],
-    );
 
     const handleAddFriend = useCallback(
         (id: number) => {
@@ -80,9 +45,8 @@ export const FriendsList = ({
                 // @ts-ignore
                 dispatch(deleteFriend(id));
             }
-            refreshFriend();
         },
-        [dispatch, refreshFriend],
+        [dispatch],
     );
 
     const handleAccept = useCallback(
@@ -95,67 +59,28 @@ export const FriendsList = ({
                         accept: true,
                     }),
                 );
-                refreshFriend();
             }
         },
-        [refreshFriend, dispatch],
+        [dispatch],
     );
-    const handleIsAddNewFriend = (newTabs: string) => {
-        if (newTabs === 'добавить в друзья') {
-            setIsAddingFriend(true);
-        } else {
-            setIsAddingFriend(false);
-        }
-
-        if (newTabs === 'Полученные заявки в друзья') {
-            setIsAccept(true);
-        } else {
-            setIsAccept(false);
-        }
-    };
-    const handleChangeTabs = (newTabs: Tabs): void => {
-        setCurrentTab(newTabs.tabs);
-        setCurrentArray(newTabs?.value);
-        handleIsAddNewFriend(newTabs?.tabs);
-        refreshFriend();
-    };
 
     return (
         <div className={classNames(cls.FriendsPage, {}, [])}>
-            <div className={classNames(cls.headerCard, {}, [])}>
-                {TabsInfo.map((item) => (
-                    <Button
-                        style={{
-                            borderRadius: 0,
-                            backgroundColor:
-                                currentTab === item.tabs
-                                    ? '#74a2b2'
-                                    : 'transparent',
-                        }}
-                        key={item.tabs}
-                        onClick={() => handleChangeTabs(item)}
-                    >
-                        {item.tabs}
-                    </Button>
-                ))}
-            </div>
             <div>
                 <div className={classNames(cls.Counter, {}, [])}>
-                    {`Человек в списке: ${currentArray?.length}`}
+                    {`Человек в списке: ${actualFriends?.length}`}
                 </div>
                 <Input
                     onChange={() => {}}
                     placeholder="Введите имя пользователя"
                 />
-                {currentArray?.map((userinfo) => (
+                {actualFriends?.map((userinfo) => (
                     <FriendCard
                         key={userinfo.id}
                         handleAccept={handleAccept}
                         handleAddFriend={handleAddFriend}
-                        accept={isAccept}
                         handleDeleteFriend={handleDeleteFriend}
                         isLoading={isLoading}
-                        isAddingNew={isAddingFriend}
                         user={userinfo}
                     />
                 ))}
