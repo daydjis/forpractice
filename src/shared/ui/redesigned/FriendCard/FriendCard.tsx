@@ -80,11 +80,11 @@ export const FriendCard = (
                     </div>
                 </div>
                     <div className={classNames(cls.ContainerInfo, {}, [className])}>
-                        {isAddingNew && user.is_friend !== "YOU_REQUESTED_FRIENDSHIP" && <Button
+                        {isAddingNew  && <Button
                             onClick={()=> {if (user.id) handleAddFriend(user.id)}}>
                             {t('Добавить в друзья')}
                         </Button>}
-                        {!isAddingNew && !accept && user.is_friend === 'YOU_REQUESTED_FRIENDSHIP' && <Button
+                        {!isAddingNew && !accept  && <Button
                             onClick={()=> {if (user.id) {handleDeleteFriend(user.id)}}}
                             type="submit">
                             {t('Удалить из друзей')}
@@ -94,7 +94,7 @@ export const FriendCard = (
                             type="submit">
                             {t('Принять заявку')}
                         </Button>}
-                        {user.is_friend === 'YOU_REQUESTED_FRIENDSHIP' &&
+                        {false &&
                             <Button disabled>{t('Заявка уже отправлена')}</Button>
                         }
                         <Button>{t('Написать сообщение')}</Button>

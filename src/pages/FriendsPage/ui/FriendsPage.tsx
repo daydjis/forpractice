@@ -18,12 +18,12 @@ export const FriendsPage = ({className}: FriendsPageProps) => {
                 refreshFriend={refetch}
                 isLoading={isLoading}
                 actualFriends={data?.actual_friends.map(item => ({ ...item.user, acceptId: item.info.id }))}
-                allUser={allUsers?.data.filter(item => (item.is_friend !== 'NOT_FRIEND'))}
+                allUser={allUsers?.data}
                 receivedInvites={data?.received_invites.map(item => ({ ...item.user, acceptId: item.info.id }))}
                 sentInvites={data?.sent_invites.map(item => ({ ...item.user, acceptId: item.info.id }))}
             />
         )
     } return  (<Loader/>)
-   
+
 }
 
